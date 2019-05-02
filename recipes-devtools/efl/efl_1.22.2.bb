@@ -69,6 +69,8 @@ EXTRA_OECONF = " \
     --disable-physics \
     "
 
+# Handle the needs of the Target build- including specifying the efl-native tools
+# to do content generation...
 EXTRA_OECONF_append_class-target = " \
     --enable-harfbuzz \
     --enable-fribidi \
@@ -76,6 +78,9 @@ EXTRA_OECONF_append_class-target = " \
     --with-eolian-gen=${STAGING_BINDIR_NATIVE}/eolian_gen \
     --with-eolian-cxx=${STAGING_BINDIR_NATIVE}/eolian_cxx \
     --with-elua=${STAGING_BINDIR_NATIVE}/elua \
+    --with-bin-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
+    --with-elementary-codegen=${STAGING_BINDIR_NATIVE}/elementary_codegen \
+    --with-elm-prefs-cc=${STAGING_BINDIR_NATIVE}/elm_prefs_cc \
     "
 
 EXTRA_OECONF_append_class-native = " \
