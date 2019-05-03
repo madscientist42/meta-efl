@@ -80,7 +80,7 @@ EXTRA_OECONF_append_class-target = " \
     --with-eolian-gen=${STAGING_BINDIR_NATIVE}/eolian_gen \
     --with-eolian-cxx=${STAGING_BINDIR_NATIVE}/eolian_cxx \
     --with-elua=${STAGING_BINDIR_NATIVE}/elua \
-    --with-bin-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
+    --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
     --with-elementary-codegen=${STAGING_BINDIR_NATIVE}/elementary_codegen \
     --with-elm-prefs-cc=${STAGING_BINDIR_NATIVE}/elm_prefs_cc \
     "
