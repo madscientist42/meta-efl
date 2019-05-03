@@ -8,6 +8,70 @@ DEPENDS += " \
     xcb-util-keysyms \
     "
 
+# Require all of EFL's functional core and it's dependencies if we're specified...
+RDEPENDS_${PN} = " \ 
+    luajit \
+    libx11 \
+    libxcursor \
+    libxcomposite \
+    libxinerama \
+    libxrandr \
+    libxtst \
+    libxscrnsaver \
+    harfbuzz \
+    fribidi \
+    libjpeg-turbo \
+    libpng \
+    giflib \
+    tiff \ 
+    freetype \
+    poppler \
+    avahi-daemon \
+    avahi-dnsconfd \
+    libavahi-client \
+    libavahi-glib \
+    libavahi-gobject \
+    avahi-utils \
+    util-linux \
+    librsvg \
+    eudev \
+    libsndfile1 \    
+    gstreamer1.0 \
+	gstreamer1.0-libav \
+	gstreamer1.0-plugins-good \
+	gstreamer1.0-plugins-bad \
+    libeet \
+    libefreet \
+    ecore-audio \
+    ecore-input-evas \
+    ecore-input \
+    ecore-imf-evas \
+    ecore-imf \
+    ecore-file \
+    ecore-con \
+    ecore-ipc \
+    ecore-x \
+    ecore-evas \
+    libemotion \
+    eo \
+    ecore \
+    edje \
+    eet \
+    eeze \
+    efreet \ 
+    eina \    
+    eio \
+    embryo \
+    emotion \ 
+    ethumb \
+    evas \
+    eldbus \
+    elua \
+    elementary \
+    elementary-themes \
+    elementary-configs \
+    "
+
 SRC_URI = " \
     git://git.enlightenment.org/core/enlightenment.git;protocol=https;branch=enlightenment-0.22 \
 	"
