@@ -45,6 +45,8 @@ DEPENDS_class-native += " \
     libpng-native \
     "
 
+PROVIDES += "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
+
 SRC_URI = " \
     git://git.enlightenment.org/core/efl.git;protocol=https;branch=efl-1.22 \
 	"
@@ -119,3 +121,239 @@ do_autotools_fixes() {
     touch ${S}/ABOUT-NLS
 }
 addtask do_autotools_fixes after do_fetch before do_configure 
+
+
+# Start defining all the packagings for this...
+PACKAGES =+ "edje-utils embryo-utils embryo-tests efreet-trash efreet-mime libeet libefreet ecore-audio ecore-input-evas ecore-input ecore-imf-evas ecore-imf ecore-file ecore-con ecore-ipc ecore-x ecore-evas libemotion eo ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus elua elementary elementary-dev elementary-themes elementary-configs elementary-dbg elementary-tests elementary-accessibility"
+
+FILES_efreet-trash = " \
+    ${libdir}/libefreet_trash${SOLIBS} \
+    "
+
+FILES_efreet-mime = " \
+    ${libdir}/libefreet_mime${SOLIBS} \
+    "
+
+FILES_libeet = " \
+    ${libdir}/libeet${SOLIBS} \
+    "
+    
+FILES_libefreet = " \
+    ${libdir}/libefreet${SOLIBS} \
+    "
+
+FILES_ecore-audio = "\
+    ${libdir}/libecore_audio${SOLIBS} \
+    "
+
+FILES_ecore-input-evas = "\
+    ${libdir}/libecore_input_evas${SOLIBS} \
+    "
+
+FILES_ecore-input = "\
+    ${libdir}/libecore_input${SOLIBS} \
+    "
+
+FILES_ecore-imf-evas = "\
+    ${libdir}/libecore_imf_evas${SOLIBS} \
+    ${libdir}/ecore-imf/modules/*/*/module.so \
+    "
+
+FILES_ecore-imf = "\
+    ${libdir}/libecore_imf${SOLIBS} \
+    "
+
+FILES_ecore-file = "\
+    ${libdir}/libecore_file${SOLIBS} \
+    "
+
+FILES_ecore-con = "\
+    ${libdir}/libecore_con${SOLIBS} \
+    ${libdir}/ecore_con/utils/v-1.22/efl_net_proxy_helper \
+    "
+
+FILES_ecore-ipc = "\
+    ${libdir}/libecore_ipc${SOLIBS} \
+    "
+
+FILES_ecore-x = "\
+    ${libdir}/libecore_x${SOLIBS} \
+    ${libdir}/ecore_x/bin/v-*/ecore_x_vsync \
+    "
+
+FILES_ecore-evas = "\
+    ${libdir}/libecore_evas${SOLIBS} \
+    ${libdir}/ecore-evas/engines/*/*/module.so \
+    "
+
+FILES_eio = "\
+    ${libdir}/libeio${SOLIBS} \
+    "
+
+FILES_eina = "\
+    ${libdir}/libeina${SOLIBS} \
+    ${bindir}/eina-bench-cmp \
+    "
+
+FILES_edje-utils = "\
+    ${bindir}/edje_* \
+    ${datadir}/edje/include/edje.inc \
+    "
+
+FILES_eldbus = "\
+    ${libdir}/libeldbus${SOLIBS} \
+    "
+
+FILES_eo = "\
+    ${libdir}/libeo${SOLIBS} \
+    "
+
+FILES_libemotion = "\
+    ${libdir}/libemotion${SOLIBS} \
+    "
+
+FILES_efreet = " \
+    ${datadir}/dbus-1/services/*Efreet* \
+    ${libdir}/efreet/*/efreet*create \
+    ${bindir}/efreetd \
+    ${datadir}/efreet \
+    "
+
+FILES_eet = " \
+    ${bindir}/eet \
+    ${bindir}/eetpack \
+    ${bindir}/vieet \
+    ${bindir}/diffeet \
+    ${libdir}/libeet${SOLIBS} \
+    "
+
+FILES_emotion = " \
+    ${datadir}/emotion \
+    ${libdir}/emotion/modules/gstreamer1/*/module.so \
+    "
+
+FILES_embryo-tests = " \
+    ${datadir}/embryo/ \
+    "
+
+FILES_embryo-utils = " \
+    ${binddir}/embryo_* \
+    "
+
+FILES_embryo = " \
+    ${libdir}/libembryo${SOLIBS} \
+    "
+
+FILES_ethumb = " \
+    ${datadir}/dbus-1/services/*Ethumb* \
+    ${libdir}/libethumb${SOLIBS} \
+    ${libdir}/libethumb_client${SOLIBS} \
+    ${bindir}/ethumbd \
+    ${bindir}/ethumbd_client \
+    ${bindir}/ethumb \
+    ${libdir}/ethumb/*/*/*/module.so \
+    ${libdir}/ethumb/*/*/*/*.edj \
+    ${libdir}/ethumb_client/utils/*/ethumbd_slave \
+    ${datadir}/ethumb* \
+    "
+
+FILES_ecore = " \
+    ${libdir}/libecore${SOLIBS} \
+    ${libdir}/ecore*/*/*/*/module.so \
+    ${datadir}/ecore* \
+    "
+
+FILES_evas = " \
+    ${libdir}/libevas${SOLIBS} \
+    ${libdir}/evas* \
+    ${datadir}/evas* \
+    ${bindir}/evas_cserve2_* \
+    "
+
+FILES_eeze = " \
+    ${libdir}/libeeze${SOLIBS} \
+    ${libdir}/eeze*/*/*/*/*/module.so \
+    ${datadir}/eeze \
+    ${bindir}/eeze_* \
+    "
+
+FILES_edje = " \
+    ${libdir}/libedje${SOLIBS} \
+    ${libdir}/edje*/*/*/*/module.so \
+    ${libdir}/edje/utils/*/epp \
+    ${datadir}/edje \
+    ${datadir}/mime \
+    "
+
+FILES_elua = " \
+    ${bindir}/elua \
+    ${datadir}/elua \
+    "
+
+FILES_elementary += "\
+    ${libdir}/edje/modules/elm \
+    ${libdir}/elementary/* \
+    ${prefix}/share/elementary/edje_externals/* \
+    "
+
+FILES_elementary-dev += "\
+    ${bindir}/elm_prefs_cc \
+    ${libdir}/elementary/modules/*/*/module.la \
+    ${libdir}/cmake \
+    "
+
+FILES_elementary-themes = "\
+    ${datadir}/elementary/themes \
+    "
+
+FILES_elementary-configs = "\
+    ${datadir}/elementary/config \
+    "
+
+FILES_elementary-dbg += "\
+    ${libdir}/elementary/modules/*/*/.debug \
+    ${libdir}/edje/modules/elm/*/.debug \
+    "
+
+FILES_elementary-tests = "\
+    ${bindir}/elementary* \
+    ${datadir}/elementary/images \
+    ${datadir}/elementary/objects \
+    ${datadir}/elementary/examples \
+    ${datadir}/applications/* \
+    ${datadir}/icons/* \
+    ${libdir}/elementary/modules/test_entry/* \
+    ${libdir}/elementary/modules/test_map/* \
+    ${prefix}/share/elementary/test* \
+    "
+
+FILES_elementary-accessibility = "\
+    ${libdir}/elementary/modules/access_output/* \
+    "
+
+FILES_${PN}-dbg += " \
+    ${libdir}/efreet/*/.debug \
+    ${libdir}/ecore*/*/*/*/.debug \
+    ${libdir}/ecore*/*/*/.debug \
+    ${libdir}/evas*/*/*/*/*/.debug \
+    ${libdir}/evas/cserve2/bin/*/.debug \
+    ${libdir}/eeze*/*/*/*/*/.debug \
+    ${libdir}/edje*/*/*/*/.debug \
+    ${libdir}/edje/utils/*/.debug \
+    ${libdir}/ethumb/*/*/*/.debug \
+    ${libdir}/ethumb_client/utils/*/.debug \
+    ${libdir}/emotion/modules/gstreamer1/*/.debug \
+    "
+
+FILES_${PN}-dev += " \
+    ${libdir}/cmake \
+    ${libdir}/ecore*/*/*/*/module.la \
+    ${libdir}/evas*/*/*/*/*/module.la \
+    ${libdir}/ethumb*/*/*/*/module.la \
+    ${libdir}/eeze*/*/*/*/*/module.la \
+    ${libdir}/edje*/*/*/*/module.la \
+    ${libdir}/emotion/modules/gstreamer1/*/module.la \
+    ${datadir}/gdb/auto-load \
+    ${datadir}/eo/gdb \
+    ${bindir}/eldbus-codegen \
+"
