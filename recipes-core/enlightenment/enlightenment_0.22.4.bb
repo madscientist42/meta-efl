@@ -1,4 +1,4 @@
-SUMMARY = "Enlightenment Foundation Libraries"
+SUMMARY = "Enlightenment Window Manager"
 LICENSE = "BSD"
 HOMEPAGE = "https://www.enlightenment.org"
 
