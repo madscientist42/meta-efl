@@ -1,0 +1,16 @@
+From 1378667c47ce9f20de172ada1eb237eef0056d53 Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Sun, 5 May 2019 11:15:24 -0500
+Subject: Unless you're using bash specific calls, use /bin/sh!
+
+
+diff --git a/data/Xsession b/data/Xsession
+index bf35ed5..e504a77 100755
+--- a/data/Xsession
++++ b/data/Xsession
+@@ -1,4 +1,4 @@
+-#!/bin/bash
++#!/bin/sh
+ # Copyright 2018 Obsidian-Studios, Inc.
+ # Distributed under the terms of the GNU General Public License v3
+ #

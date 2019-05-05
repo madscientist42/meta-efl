@@ -14,6 +14,7 @@ RDEPENDS_${PN} = " \
 
 SRC_URI = " \
     git://github.com/Obsidian-StudiosInc/entrance.git;protocol=https \
+    file://change_to_sh_instead_of_bash.patch \
 	"
 
 SRCREV = "d0ef8b13baa3410b9ca0cd4245979312dc2fc46a"
@@ -26,7 +27,12 @@ inherit meson pkgconfig
 
 S = "${WORKDIR}/git"
 
+
+# For now, turn off PAM, consolekit, etc. until we can gracefully add packageconfig knobs for this stuff.
 EXTRA_OEMESON = " \
+    -Dpam=false \
+    -Dconsolekit=false \
+    -Dedje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
     "
 
 
