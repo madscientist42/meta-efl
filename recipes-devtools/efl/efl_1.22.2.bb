@@ -120,7 +120,7 @@ do_autotools_fixes() {
     # Give autotools a binky- it won't backfill this and they've thoughtfully .gitignored it.
     touch ${S}/ABOUT-NLS
 }
-addtask do_autotools_fixes after do_fetch before do_configure 
+addtask do_autotools_fixes after do_unpack before do_configure 
 
 
 # Start defining all the packagings for this...
