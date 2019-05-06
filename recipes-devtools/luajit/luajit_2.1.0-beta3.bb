@@ -14,7 +14,7 @@ S = "${WORKDIR}/LuaJIT-${PV}"
 
 inherit pkgconfig binconfig siteinfo
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
 
 # http://luajit.org/install.html#cross
 # Host luajit needs to be compiled with the same pointer size

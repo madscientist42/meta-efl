@@ -45,6 +45,36 @@ DEPENDS_class-native += " \
     libpng-native \
     "
 
+DEPENDS_class-nativesdk += " \
+    efl-native \
+    nativesdk-openssl \
+    nativesdk-luajit \
+    nativesdk-libjpeg-turbo \
+    nativesdk-giflib \
+    nativesdk-tiff \ 
+    nativesdk-freetype \
+    nativesdk-util-linux \
+    nativesdk-gettext \
+    nativesdk-glib-2.0 \
+    nativesdk-dbus \
+    nativesdk-libpng \
+    "
+
+RDEPENDS_nativesdk-${PN} = "\
+    nativesdk-openssl \
+    nativesdk-luajit \
+    nativesdk-libjpeg-turbo \
+    nativesdk-giflib \
+    nativesdk-tiff \ 
+    nativesdk-freetype \
+    nativesdk-util-linux \
+    nativesdk-gettext \
+    nativesdk-glib-2.0 \
+    nativesdk-dbus \
+    nativesdk-libpng \
+    nativesdk-nasm \
+    "
+    
 PROVIDES += "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
 
 SRC_URI = " \
@@ -113,7 +143,42 @@ EXTRA_OECONF_append_class-native = " \
     --disable-librsvg \
     "
 
-BBCLASSEXTEND = "native"
+EXTRA_OECONF_append_class-nativesdk = " \
+    --disable-fontconfig \
+    --disable-audio \
+    --disable-multisense \
+    --disable-libeeze \
+    --with-x11=none \
+    --disable-harfbuzz \
+    --disable-fribidi \
+    --disable-image-loader-bmp \
+    --disable-image-loader-eet \
+    --disable-image-loader-generic \
+    --disable-image-loader-gif \
+    --disable-image-loader-ico \
+    --disable-image-loader-jp2k \
+    --disable-image-loader-pmaps \
+    --disable-image-loader-psd \
+    --disable-image-loader-tga \
+    --disable-image-loader-wbmp \
+    --disable-image-loader-webp \
+    --disable-image-loader-xpm \
+    --disable-image-loader-tgv \
+    --disable-image-loader-dds \
+    --disable-gstreamer1 \
+    --disable-poppler \
+    --disable-avahi \
+    --disable-librsvg \
+    --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
+    --with-eolian-gen=${STAGING_BINDIR_NATIVE}/eolian_gen \
+    --with-eolian-cxx=${STAGING_BINDIR_NATIVE}/eolian_cxx \
+    --with-elua=${STAGING_BINDIR_NATIVE}/elua \
+    --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
+    --with-elementary-codegen=${STAGING_BINDIR_NATIVE}/elementary_codegen \
+    --with-elm-prefs-cc=${STAGING_BINDIR_NATIVE}/elm_prefs_cc \
+    "
+
+BBCLASSEXTEND = "native nativesdk"
 
 # Now handle processing special cases for tasks...  There's going to be a few...  (Sigh...)
 do_autotools_fixes() {
