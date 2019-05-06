@@ -1,0 +1,38 @@
+From 3670837cd2d1472ae692817de98a4903c637e877 Mon Sep 17 00:00:00 2001
+From: Frank Earl <fearl@watchguardvideo.com>
+Date: Mon, 6 May 2019 15:17:32 -0500
+Subject: Fix OE Build capability.
+
+It finds the target sysroot fine, but it explicitly overrides
+the behavior for edje_cc, which pretty much exclusively grabs
+/usr/bin/edge_cc...which is QUITE wrong for OE.  Patch the
+meson config to do the right things and let it run otherwise.
+
+diff --git a/meson.build b/meson.build
+index ef78b83..afd548e 100644
+--- a/meson.build
++++ b/meson.build
+@@ -36,8 +36,12 @@ dir_locale = join_paths(dir_prefix, get_option('localedir'))
+ cc = meson.get_compiler('c')
+ 
+ ##### get edje command
+-edje_cmd = join_paths(edje.get_pkgconfig_variable('prefix'),
+-                      'bin', 'edje_cc')
++edje_cmd = get_option('edje-cc')
++if edje_cmd == ''
++  edje_cmd = join_paths(edje.get_pkgconfig_variable('prefix'),
++                        'bin', 'edje_cc')
++endif
++
+ ##### config.h
+ cfg.set_quoted('PACKAGE'                 , proj)
+ cfg.set_quoted('PACKAGE_NAME'            , proj)
+diff --git a/meson_options.txt b/meson_options.txt
+index e69de29..e589ca7 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -0,0 +1,4 @@
++option('edje-cc',
++       type       : 'string',
++       description: 'A path to a edje_cc. Defaults to system edje_cc')
++
