@@ -12,7 +12,7 @@ DEPENDS += " \
     "
 
 # Require all of EFL's functional core and it's dependencies if we're specified...
-RDEPENDS_${PN} = "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus python3 python3-efl python-dbus"
+RDEPENDS_${PN} = "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus python3 python3-efl python3-dbus"
 
 SRC_URI = " \
     git://git.enlightenment.org/apps/epour.git;protocol=https \
