@@ -14,4 +14,6 @@ RDEPENDS_${PN} = " \
     equate \
     eruler \
     espionage \
+    rage \
+    terminology \
     "
