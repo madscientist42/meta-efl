@@ -11,4 +11,7 @@ RDEPENDS_${PN} = " \
     emprint \
     ephoto \
     epour \
+    equate \
+    eruler \
+    espionage \
     "

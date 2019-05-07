@@ -189,7 +189,7 @@ addtask do_autotools_fixes after do_unpack before do_configure
 
 
 # Start defining all the packagings for this...
-PACKAGES =+ "edje-utils embryo-utils embryo-tests efreet-trash efreet-mime libeet libefreet ecore-audio ecore-input-evas ecore-input ecore-imf-evas ecore-imf ecore-file ecore-con ecore-ipc ecore-x ecore-evas libemotion eo ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus elua elementary elementary-dev elementary-themes elementary-configs elementary-dbg elementary-tests elementary-accessibility"
+PACKAGES =+ "edje-utils embryo-utils embryo-tests efreet-trash efreet-mime libeet libefreet ecore-audio ecore-input-evas ecore-input ecore-imf-evas ecore-imf ecore-file ecore-con ecore-ipc ecore-x ecore-evas libemotion eo ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus elua elementary elementary-dev elementary-themes elementary-configs elementary-tests"
 
 FILES_efreet-trash = " \
     ${libdir}/libefreet_trash${SOLIBS} \
@@ -390,24 +390,6 @@ FILES_elementary-tests = "\
     ${libdir}/elementary/modules/test_entry/* \
     ${libdir}/elementary/modules/test_map/* \
     ${prefix}/share/elementary/test* \
-    "
-
-FILES_elementary-accessibility = "\
-    ${libdir}/elementary/modules/access_output/* \
-    "
-
-FILES_${PN}-dbg += " \
-    ${libdir}/efreet/*/.debug \
-    ${libdir}/ecore*/*/*/*/.debug \
-    ${libdir}/ecore*/*/*/.debug \
-    ${libdir}/evas*/*/*/*/*/.debug \
-    ${libdir}/evas/cserve2/bin/*/.debug \
-    ${libdir}/eeze*/*/*/*/*/.debug \
-    ${libdir}/edje*/*/*/*/.debug \
-    ${libdir}/edje/utils/*/.debug \
-    ${libdir}/ethumb/*/*/*/.debug \
-    ${libdir}/ethumb_client/utils/*/.debug \
-    ${libdir}/emotion/modules/gstreamer1/*/.debug \
     "
 
 FILES_${PN}-dev += " \
