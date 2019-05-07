@@ -4,6 +4,7 @@ HOMEPAGE = "http://www.freedesktop.org/Software/dbus"
 LICENSE = "MIT & AFL-2.1 | GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b03240518994df6d8c974675675e5ca4 \
 		    file://dbus-gmain/COPYING;md5=05c3eacd50f69bb1d58afec460baad57 "
+
 DEPENDS = "expat dbus dbus-glib virtual/libintl python-pyrex-native"
 
 SRC_URI = "http://dbus.freedesktop.org/releases/dbus-python/dbus-python-${PV}.tar.gz"
@@ -32,3 +33,5 @@ FILES_${PN}-dev += "${libdir}/pkgconfig"
 #    # Remove files that clash with python3-dbus; their content is same
 #    rm ${D}${includedir}/dbus-1.0/dbus/dbus-python.h ${D}${libdir}/pkgconfig/dbus-python.pc
 #}
+
+BBCLASSEXTEND = "native nativesdk"
