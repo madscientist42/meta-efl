@@ -6,4 +6,9 @@ inherit packagegroup
 RDEPENDS_${PN} = " \
     enlightenment \
     entrance \
+    econnman \
+    ecrire \
+    emprint \
+    ephoto \
+    epour \
     "
