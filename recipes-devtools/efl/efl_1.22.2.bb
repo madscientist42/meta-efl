@@ -106,6 +106,10 @@ EXTRA_OECONF = " \
 EXTRA_OECONF_append_class-target = " \
     --enable-harfbuzz \
     --enable-fribidi \
+    --with-opengl=full \
+    --with-pic \
+    --with-x \
+    --with-x11=xlib \
     --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
     --with-eolian-gen=${STAGING_BINDIR_NATIVE}/eolian_gen \
     --with-eolian-cxx=${STAGING_BINDIR_NATIVE}/eolian_cxx \
