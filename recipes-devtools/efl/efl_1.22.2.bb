@@ -27,6 +27,7 @@ DEPENDS += " \
     libsndfile1 \    
     gstreamer1.0 \
 	gstreamer1.0-libav \
+	gstreamer1.0-plugins-base \
 	gstreamer1.0-plugins-good \
 	gstreamer1.0-plugins-bad \
     "
@@ -189,7 +190,7 @@ do_autotools_fixes() {
     # Give autotools a binky- it won't backfill this and they've thoughtfully .gitignored it.
     touch ${S}/ABOUT-NLS
 }
-addtask do_autotools_fixes after do_unpack before do_configure 
+do_patch[postfuncs] += "do_autotools_fixes "
 
 
 # Start defining all the packagings for this...

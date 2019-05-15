@@ -97,6 +97,11 @@ EXTRA_OECONF = " \
     --disable-rpath \
     --disable-systemd \
     --disable-geolocation \
+    --disable-backlight \
+    --disable-temperature \
+    --disable-battery \
+    --disable-device-udev \
+    --disable-sysinfo \
     "
 
 # Now handle processing special cases for tasks...  There's going to be a few...  (Sigh...)
@@ -104,7 +109,7 @@ do_autotools_fixes() {
     # Give autotools a binky- it won't backfill this and they've thoughtfully .gitignored it.
     touch ${S}/ABOUT-NLS
 }
-addtask do_autotools_fixes after do_fetch before do_configure 
+do_patch[postfuncs] += "do_autotools_fixes "
 
 # Append one file to the end of the list...
 FILES_${PN} += "/usr/share/xsessions/enlightenment.desktop"
