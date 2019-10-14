@@ -22,6 +22,7 @@ export STAGING_LIBDIR
 export STAGING_INCDIR
 
 RDEPENDS_${PN} = "python-io python-logging python-stringold python-threading python-xml"
+RDEOEBDS_${PN}_class-nativesdk = "python3-dbus"
 
 FILES_${PN}-dev += "${libdir}/pkgconfig"
 
