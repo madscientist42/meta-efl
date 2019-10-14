@@ -17,7 +17,7 @@ SRC_URI = " \
     file://change_to_sh_instead_of_bash.patch \
 	"
 
-SRCREV = "d0ef8b13baa3410b9ca0cd4245979312dc2fc46a"
+SRCREV = "f5f2adcfd5872ae94a62d4d12810b6ee9ce95f91"
 
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
