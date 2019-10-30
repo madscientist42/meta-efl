@@ -20,13 +20,14 @@ inherit distutils3-base autotools pkgconfig
 
 RDEPENDS_${PN} = "python3-io python3-logging python3-stringold python3-threading python3-xml"
 
-do_install_append() {
+clean_up_dev() {
     # Remove files that clash with python-dbus-dev; their content is same and we've got
     # python-dbus-dev separated out from this and python-dbus to allow it to build
     # and package out right so it can cleanly be used elsewhere...
     rm -rf ${D}${includedir} 
     rm -rf ${D}${libdir}/pkgconfig
 }
+do_install[postfuncs] += "clean_up_dev "
 
 PACKAGES = "${PN} ${PN}-dbg"
 
