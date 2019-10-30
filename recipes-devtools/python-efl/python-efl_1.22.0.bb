@@ -7,6 +7,9 @@ DEPENDS = " \
     efl-native \
     dbus-native \
     python-dbus \
+    python-dbus-native \
+    python-dbus-dev \
+    python-dbus-dev-native \
     python-native \
     python-cython-native \
     "    

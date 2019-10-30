@@ -22,13 +22,15 @@ export STAGING_LIBDIR
 export STAGING_INCDIR
 
 RDEPENDS_${PN} = "python-io python-logging python-stringold python-threading python-xml"
-RDEOEBDS_${PN}_class-nativesdk = "python3-dbus"
 
-FILES_${PN}-dev += "${libdir}/pkgconfig"
-
-do_install_class-nativesdk-append() {
-    # Remove files that clash with python3-dbus; their content is same
-    rm ${D}${includedir}/dbus-1.0/dbus/dbus-python.h ${D}${libdir}/pkgconfig/dbus-python.pc
+do_install_append() {
+    # Remove files that clash with python-dbus-dev; their content is same and we've got
+    # python-dbus-dev separated out from this and python3-dbus to allow it to build
+    # and package out right so it can cleanly be used elsewhere...
+    rm -rf ${D}${includedir} 
+    rm -rf ${D}${libdir}/pkgconfig
 }
+
+PACKAGES = "${PN} ${PN}-dbg"
 
 BBCLASSEXTEND = "native nativesdk"
