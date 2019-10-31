@@ -8,6 +8,7 @@ DEPENDS += " \
     python3-efl-native \
     python3-distutils-extra \
     python3-distutils-extra-native \
+    python3-xdg \
     intltool-native \
     "
 
