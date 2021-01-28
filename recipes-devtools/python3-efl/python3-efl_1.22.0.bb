@@ -8,11 +8,9 @@ DEPENDS = " \
     dbus-native \
     python3-dbus \
     python3-dbus-native \
-    python-dbus-dev \
-    python-dbus-dev-native \
     python3-native \
     python3-cython-native \
-    "    
+    "
 
 SRC_URI = " \
     git://git.enlightenment.org/bindings/python/python-efl.git;protocol=https;branch=python-efl-1.22 \

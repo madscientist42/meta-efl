@@ -13,7 +13,6 @@ RDEPENDS_${PN} = " \
     epour \
     equate \
     eruler \
-    espionage \
     rage \
     terminology \
     "

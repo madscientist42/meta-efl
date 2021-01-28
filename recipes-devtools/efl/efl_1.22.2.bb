@@ -2,6 +2,9 @@ SUMMARY = "Enlightenment Foundation Libraries"
 LICENSE = "BSD & LGPLv2"
 HOMEPAGE = "https://www.enlightenment.org"
 
+# Compute the first two digits of ${PV} as Base PV...
+BPV = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
+
 DEPENDS += " \
     efl-native \
     luajit \
@@ -17,14 +20,15 @@ DEPENDS += " \
     libjpeg-turbo \
     libpng \
     giflib \
-    tiff \ 
+    tiff \
     freetype \
     poppler \
     avahi \
     util-linux \
     librsvg \
     eudev \
-    libsndfile1 \    
+    libsndfile1 \
+    tslib \
     gstreamer1.0 \
 	gstreamer1.0-libav \
 	gstreamer1.0-plugins-base \
@@ -37,7 +41,7 @@ DEPENDS_class-native += " \
     luajit-native \
     libjpeg-turbo-native \
     giflib-native \
-    tiff-native \ 
+    tiff-native \
     freetype-native \
     util-linux-native \
     gettext-native \
@@ -52,7 +56,7 @@ DEPENDS_class-nativesdk += " \
     nativesdk-luajit \
     nativesdk-libjpeg-turbo \
     nativesdk-giflib \
-    nativesdk-tiff \ 
+    nativesdk-tiff \
     nativesdk-freetype \
     nativesdk-util-linux \
     nativesdk-gettext \
@@ -66,7 +70,7 @@ RDEPENDS_nativesdk-${PN} = "\
     nativesdk-luajit \
     nativesdk-libjpeg-turbo \
     nativesdk-giflib \
-    nativesdk-tiff \ 
+    nativesdk-tiff \
     nativesdk-freetype \
     nativesdk-util-linux \
     nativesdk-gettext \
@@ -75,14 +79,14 @@ RDEPENDS_nativesdk-${PN} = "\
     nativesdk-libpng \
     nativesdk-nasm \
     "
-    
+
 PROVIDES += "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
 
 SRC_URI = " \
-    git://git.enlightenment.org/core/efl.git;protocol=https;branch=efl-1.22 \
+    git://git.enlightenment.org/core/efl.git;protocol=https;branch=efl-${BPV} \
 	"
 
-SRCREV = "v1.22.2"
+SRCREV = "v${PV}"
 
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=e5f6e713fdebf1237adf5c87de8255d8 \
@@ -107,6 +111,7 @@ EXTRA_OECONF = " \
 EXTRA_OECONF_append_class-target = " \
     --enable-harfbuzz \
     --enable-fribidi \
+    --enable-fb \
     --with-opengl=full \
     --with-pic \
     --with-x \
@@ -207,7 +212,7 @@ FILES_efreet-mime = " \
 FILES_libeet = " \
     ${libdir}/libeet${SOLIBS} \
     "
-    
+
 FILES_libefreet = " \
     ${libdir}/libefreet${SOLIBS} \
     "
@@ -408,4 +413,4 @@ FILES_${PN}-dev += " \
     ${datadir}/gdb/auto-load \
     ${datadir}/eo/gdb \
     ${bindir}/eldbus-codegen \
-"
+    "
