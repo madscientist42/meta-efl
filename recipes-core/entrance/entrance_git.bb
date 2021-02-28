@@ -7,8 +7,10 @@ DEPENDS += " \
     efl \
     "
 
-# Require all of Enlightenment and EFL's functional core and it's dependencies if we're specified...
-RDEPENDS_${PN} = " \ 
+# Require all of Enlightenment and EFL's functional core and it's dependencies
+# if we're specified.  Technically, this is universal, but right now we're still
+# only really used if we're in meta-efl, soo...Enlightenment's a requirement.
+RDEPENDS_${PN} = " \
     enlightenment \
     "
 
@@ -17,13 +19,13 @@ SRC_URI = " \
     file://change_to_sh_instead_of_bash.patch \
 	"
 
-SRCREV = "f5f2adcfd5872ae94a62d4d12810b6ee9ce95f91"
+SRCREV = "4ace4c854706bb422b05052c75a692751190ad24"
 
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
     "
 
-inherit meson pkgconfig 
+inherit meson pkgconfig
 
 S = "${WORKDIR}/git"
 

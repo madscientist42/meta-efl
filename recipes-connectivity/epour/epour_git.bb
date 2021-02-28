@@ -25,7 +25,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
     "
 
-inherit python3-dir setuptools3
+inherit python3-dir setuptools3 mime-xdg
 
 S = "${WORKDIR}/git"
 

@@ -89,114 +89,59 @@ SRC_URI = " \
 SRCREV = "v${PV}"
 
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=e5f6e713fdebf1237adf5c87de8255d8 \
+    file://COPYING;md5=e12e5c3b6822d51c620d5d05a7397c5c \
     "
 
-inherit autotools pkgconfig gettext
+inherit meson pkgconfig gettext mime
 
 S = "${WORKDIR}/git"
 
-EXTRA_OECONF = " \
-    --disable-doc \
-    --disable-rpath \
-    --disable-systemd \
-    --disable-pulseaudio \
-    --disable-spectre \
-    --disable-libraw \
-    --disable-physics \
+
+# Because of the above, we're rather a MACHINE specific buildset for this part of
+# things...
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+# Core rules for build.  This is things that're generic for all BBCLASSes...things we
+# explicitly support out of box (or not...usually not...) for any case of things.
+EXTRA_OEMESON = " \
+    -Dsystemd=false \
+    -Dpulseaudio=false \
+    -Dbuild-examples=false \
+    -Dbuild-tests=false \
+    -Dphysics=false \
+    -Devas-loaders-disabler=gst,pdf,ps,raw,rsvg,xcf,dds,eet,generic,pmaps,psd,tga,tgv,wbmp,webp,xpm,json,jp2k,avif \
+    -Decore-imf-loaders-disabler=scim,ibus \
     "
 
 # Handle the needs of the Target build- including specifying the efl-native tools
 # to do content generation...
-EXTRA_OECONF_append_class-target = " \
-    --enable-harfbuzz \
-    --enable-fribidi \
-    --enable-fb \
-    --with-opengl=full \
-    --with-pic \
-    --with-x \
-    --with-x11=xlib \
-    --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
-    --with-eolian-gen=${STAGING_BINDIR_NATIVE}/eolian_gen \
-    --with-eolian-cxx=${STAGING_BINDIR_NATIVE}/eolian_cxx \
-    --with-elua=${STAGING_BINDIR_NATIVE}/elua \
-    --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
-    --with-elementary-codegen=${STAGING_BINDIR_NATIVE}/elementary_codegen \
-    --with-elm-prefs-cc=${STAGING_BINDIR_NATIVE}/elm_prefs_cc \
+EXTRA_OEMESON_append_class-target = " \
+    -Dharfbuzz=true \
+    -Dfribidi=true \
+    -Dfb=true \
+    -Dx11=true \
+    -Dopengl=full \
     "
 
-EXTRA_OECONF_append_class-native = " \
-    --disable-fontconfig \
-    --disable-audio \
-    --disable-multisense \
-    --disable-libeeze \
-    --with-x11=none \
-    --disable-harfbuzz \
-    --disable-fribidi \
-    --disable-image-loader-bmp \
-    --disable-image-loader-eet \
-    --disable-image-loader-generic \
-    --disable-image-loader-gif \
-    --disable-image-loader-ico \
-    --disable-image-loader-jp2k \
-    --disable-image-loader-pmaps \
-    --disable-image-loader-psd \
-    --disable-image-loader-tga \
-    --disable-image-loader-wbmp \
-    --disable-image-loader-webp \
-    --disable-image-loader-xpm \
-    --disable-image-loader-tgv \
-    --disable-image-loader-dds \
-    --disable-gstreamer1 \
-    --disable-poppler \
-    --disable-avahi \
-    --disable-librsvg \
+NATIVE_MESON_CONFIG = " \
+    -Dfontconfig=false \
+    -Daudio=false \
+    -Dharfbuzz=false \
+    -Dfribidi=false \
+    -Deeze=false \
+    -Dfb=false \
+    -Dx11=false \
+    -Dopengl=none \
+    -Dwl=false \
+    -Davahi=false \
+    -Dgstreamer=false \
+    -Dedje-sound-and-video=false \
     "
 
-EXTRA_OECONF_append_class-nativesdk = " \
-    --disable-fontconfig \
-    --disable-audio \
-    --disable-multisense \
-    --disable-libeeze \
-    --with-x11=none \
-    --disable-harfbuzz \
-    --disable-fribidi \
-    --disable-image-loader-bmp \
-    --disable-image-loader-eet \
-    --disable-image-loader-generic \
-    --disable-image-loader-gif \
-    --disable-image-loader-ico \
-    --disable-image-loader-jp2k \
-    --disable-image-loader-pmaps \
-    --disable-image-loader-psd \
-    --disable-image-loader-tga \
-    --disable-image-loader-wbmp \
-    --disable-image-loader-webp \
-    --disable-image-loader-xpm \
-    --disable-image-loader-tgv \
-    --disable-image-loader-dds \
-    --disable-gstreamer1 \
-    --disable-poppler \
-    --disable-avahi \
-    --disable-librsvg \
-    --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
-    --with-eolian-gen=${STAGING_BINDIR_NATIVE}/eolian_gen \
-    --with-eolian-cxx=${STAGING_BINDIR_NATIVE}/eolian_cxx \
-    --with-elua=${STAGING_BINDIR_NATIVE}/elua \
-    --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
-    --with-elementary-codegen=${STAGING_BINDIR_NATIVE}/elementary_codegen \
-    --with-elm-prefs-cc=${STAGING_BINDIR_NATIVE}/elm_prefs_cc \
-    "
+EXTRA_OEMESON_append_class-native = "${NATIVE_MESON_CONFIG}"
+EXTRA_OECONF_append_class-nativesdk = "${NATIVE_MESON_CONFIG}"
 
 BBCLASSEXTEND = "native nativesdk"
-
-# Now handle processing special cases for tasks...  There's going to be a few...  (Sigh...)
-do_autotools_fixes() {
-    # Give autotools a binky- it won't backfill this and they've thoughtfully .gitignored it.
-    touch ${S}/ABOUT-NLS
-}
-do_patch[postfuncs] += "do_autotools_fixes "
-
 
 # Start defining all the packagings for this...
 PACKAGES =+ "edje-utils embryo-utils embryo-tests efreet-trash efreet-mime libeet libefreet ecore-audio ecore-input-evas ecore-input ecore-imf-evas ecore-imf ecore-file ecore-con ecore-ipc ecore-x ecore-evas libemotion eo ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus elua elementary elementary-dev elementary-themes elementary-configs elementary-tests"
@@ -334,7 +279,7 @@ FILES_ethumb = " \
 
 FILES_ecore = " \
     ${libdir}/libecore${SOLIBS} \
-    ${libdir}/ecore*/*/*/*/module.so \
+    ${libdir}/ecore* \
     ${datadir}/ecore* \
     "
 
@@ -412,5 +357,7 @@ FILES_${PN}-dev += " \
     ${libdir}/emotion/modules/gstreamer1/*/module.la \
     ${datadir}/gdb/auto-load \
     ${datadir}/eo/gdb \
+    ${datadir}/exactness \
+    ${datadir}/eolian \
     ${bindir}/eldbus-codegen \
     "

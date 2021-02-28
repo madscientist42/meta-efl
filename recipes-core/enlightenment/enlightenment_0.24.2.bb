@@ -2,14 +2,16 @@ SUMMARY = "Enlightenment Window Manager"
 LICENSE = "BSD"
 HOMEPAGE = "https://www.enlightenment.org"
 
+# Compute the first two digits of ${PV} as Base PV...
+BPV = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
+
 DEPENDS += " \
-    efl-native \
     efl \
-    xcb-util-keysyms \
+    efl-native \
     "
 
 # Require all of EFL's functional core and it's dependencies if we're specified...
-RDEPENDS_${PN} = " \ 
+RDEPENDS_${PN} = " \
     luajit \
     libx11 \
     libxcursor \
@@ -23,7 +25,7 @@ RDEPENDS_${PN} = " \
     libjpeg-turbo \
     libpng \
     giflib \
-    tiff \ 
+    tiff \
     freetype \
     poppler \
     avahi-daemon \
@@ -35,7 +37,7 @@ RDEPENDS_${PN} = " \
     util-linux \
     librsvg \
     eudev \
-    libsndfile1 \    
+    libsndfile1 \
     gstreamer1.0 \
 	gstreamer1.0-libav \
 	gstreamer1.0-plugins-good \
@@ -58,11 +60,11 @@ RDEPENDS_${PN} = " \
     edje \
     eet \
     eeze \
-    efreet \ 
-    eina \    
+    efreet \
+    eina \
     eio \
     embryo \
-    emotion \ 
+    emotion \
     ethumb \
     evas \
     eldbus \
@@ -73,43 +75,37 @@ RDEPENDS_${PN} = " \
     "
 
 SRC_URI = " \
-    git://git.enlightenment.org/core/enlightenment.git;protocol=https;branch=enlightenment-0.22 \
+    git://git.enlightenment.org/core/enlightenment.git;protocol=https;branch=enlightenment-${BPV} \
 	"
 
-SRCREV = "v0.22.4"
+SRCREV = "v${PV}"
 
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=76de290eb3fdda12121830191c152a7d \
+    file://COPYING;md5=cf9a72875f2592643ec472b0ca65413a \
     "
 
-inherit autotools pkgconfig gettext
+inherit meson pkgconfig gettext mime-xdg
 
 S = "${WORKDIR}/git"
 
 # Handle the needs of the Target build- including specifying the efl-native tools
 # to do content generation...
-EXTRA_OECONF = " \
-    --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
-    --with-eldbus_codegen=${STAGING_BINDIR_NATIVE}/eldbus-codegen \
-    --x-includes=${STAGING_INCDIR}/X11 \
-    --x-libraries=${STAGING_LIBDIR} \
-    --disable-doc \
-    --disable-rpath \
-    --disable-systemd \
-    --disable-geolocation \
-    --disable-backlight \
-    --disable-temperature \
-    --disable-battery \
-    --disable-device-udev \
-    --disable-sysinfo \
+EXTRA_OEMESON = " \
+    -Dedje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
+    -Deet=${STAGING_BINDIR_NATIVE}/eet \
+    -Deldbus-codegen=${STAGING_BINDIR_NATIVE}/eldbus-codegen \
+    -Dsystemd=false \
+    -Dgeolocation=false \
+    -Dbacklight=false \
+    -Dbattery=false \
+    -Ddevice-udev=false \
+    -Dsysinfo=false \
+    -Dmount-eeze=true \
+    -Dwizard=false \
     "
 
-# Now handle processing special cases for tasks...  There's going to be a few...  (Sigh...)
-do_autotools_fixes() {
-    # Give autotools a binky- it won't backfill this and they've thoughtfully .gitignored it.
-    touch ${S}/ABOUT-NLS
-}
-do_patch[postfuncs] += "do_autotools_fixes "
-
 # Append one file to the end of the list...
-FILES_${PN} += "/usr/share/xsessions/enlightenment.desktop"
+FILES_${PN} += " \
+    /usr/share/xsessions/enlightenment.desktop \
+    /usr/share/icons \
+    "
