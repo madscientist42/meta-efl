@@ -76,6 +76,7 @@ RDEPENDS_${PN} = " \
 
 SRC_URI = " \
     git://git.enlightenment.org/core/enlightenment.git;protocol=https;branch=enlightenment-${BPV} \
+    file://0001-fix-compile-failure-in-wizard-module.patch \
 	"
 
 SRCREV = "v${PV}"
@@ -98,10 +99,8 @@ EXTRA_OEMESON = " \
     -Dgeolocation=false \
     -Dbacklight=false \
     -Dbattery=false \
-    -Ddevice-udev=false \
     -Dsysinfo=false \
     -Dmount-eeze=true \
-    -Dwizard=false \
     "
 
 # Append one file to the end of the list...
