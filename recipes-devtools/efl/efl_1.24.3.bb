@@ -15,6 +15,7 @@ DEPENDS += " \
     libxrandr \
     libxtst \
     libxscrnsaver \
+    libxpresent \
     harfbuzz \
     fribidi \
     libjpeg-turbo \
@@ -23,12 +24,11 @@ DEPENDS += " \
     tiff \
     freetype \
     poppler \
-    avahi \
-    util-linux \
     librsvg \
+    rlottie \
+    util-linux \
     eudev \
     libsndfile1 \
-    tslib \
     gstreamer1.0 \
 	gstreamer1.0-libav \
 	gstreamer1.0-plugins-base \
@@ -37,32 +37,31 @@ DEPENDS += " \
     "
 
 DEPENDS_class-native += " \
-    openssl-native \
     luajit-native \
     libjpeg-turbo-native \
+    libpng-native \
     giflib-native \
     tiff-native \
+    librsvg-native \
     freetype-native \
     util-linux-native \
-    gettext-native \
-    glib-2.0-native \
     dbus-native \
-    libpng-native \
+    libsndfile1-native \
     "
 
 DEPENDS_class-nativesdk += " \
     efl-native \
-    nativesdk-openssl \
-    nativesdk-luajit \
     nativesdk-libjpeg-turbo \
     nativesdk-giflib \
     nativesdk-tiff \
+    nativesdk-libpng \
+    nativesdk-librsvg \
     nativesdk-freetype \
     nativesdk-util-linux \
     nativesdk-gettext \
     nativesdk-glib-2.0 \
     nativesdk-dbus \
-    nativesdk-libpng \
+    nativesdk-libsndfile1 \
     "
 
 RDEPENDS_nativesdk-${PN} = "\
@@ -103,39 +102,38 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 # Core rules for build.  This is things that're generic for all BBCLASSes...things we
 # explicitly support out of box (or not...usually not...) for any case of things.
+#
+# FIXME : We need to properly integrate PKGCONFIG support for systemd and pulseaudio
+#         at some point in the near future...
+#
 EXTRA_OEMESON = " \
     -Dsystemd=false \
     -Dpulseaudio=false \
     -Dbuild-examples=false \
     -Dbuild-tests=false \
     -Dphysics=false \
-    -Devas-loaders-disabler=gst,pdf,ps,raw,rsvg,xcf,dds,eet,generic,pmaps,psd,tga,tgv,wbmp,webp,xpm,json,jp2k,avif \
-    -Decore-imf-loaders-disabler=scim,ibus \
     "
 
 # Handle the needs of the Target build- including specifying the efl-native tools
 # to do content generation...
 EXTRA_OEMESON_append_class-target = " \
-    -Dharfbuzz=true \
-    -Dfribidi=true \
-    -Dfb=true \
-    -Dx11=true \
+    -Decore-imf-loaders-disabler=scim,ibus \
+    -Devas-loaders-disabler=ps,raw \
     -Dopengl=full \
+    -Dxpresent=true \
+    -Dxinput2=true \
+    -Dxinput22=true \
     "
 
 NATIVE_MESON_CONFIG = " \
-    -Dfontconfig=false \
-    -Daudio=false \
     -Dharfbuzz=false \
     -Dfribidi=false \
     -Deeze=false \
-    -Dfb=false \
     -Dx11=false \
     -Dopengl=none \
-    -Dwl=false \
-    -Davahi=false \
     -Dgstreamer=false \
     -Dedje-sound-and-video=false \
+    -Devas-loaders-disabler=gst,pdf,ps,raw,xcf,dds,eet,rsvg,generic,pmaps,psd,tga,tgv,wbmp,webp,xpm,json,jp2k \
     "
 
 EXTRA_OEMESON_append_class-native = "${NATIVE_MESON_CONFIG}"

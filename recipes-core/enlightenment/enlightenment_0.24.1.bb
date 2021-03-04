@@ -8,6 +8,7 @@ BPV = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
 DEPENDS += " \
     efl \
     efl-native \
+    xcb-util-keysyms \
     "
 
 # Require all of EFL's functional core and it's dependencies if we're specified...
@@ -76,7 +77,6 @@ RDEPENDS_${PN} = " \
 
 SRC_URI = " \
     git://git.enlightenment.org/core/enlightenment.git;protocol=https;branch=enlightenment-${BPV} \
-    file://0001-fix-compile-failure-in-wizard-module.patch \
 	"
 
 SRCREV = "v${PV}"

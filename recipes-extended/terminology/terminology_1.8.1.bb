@@ -2,6 +2,9 @@ SUMMARY = "EFL Terminal Emulator"
 LICENSE = "BSD"
 HOMEPAGE = "https://www.enlightenment.org"
 
+# Compute the first two digits of ${PV} as Base PV...
+BPV = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
+
 DEPENDS += " \
     efl-native \
     efl \
@@ -11,16 +14,16 @@ DEPENDS += " \
 RDEPENDS_${PN} = "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
 
 SRC_URI = " \
-    git://git.enlightenment.org/apps/terminology.git;protocol=https \
+    git://git.enlightenment.org/apps/terminology.git;protocol=https;branch=terminology-${BPV} \
 	"
 
-SRCREV = "v1.4.0"
+SRCREV = "v${PV}"
 
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=3b2305533179f49bbe7fd6498b3a7e62 \
+    file://COPYING;md5=5194803f5875ad4c412e4d02eff083af \
     "
 
-inherit meson pkgconfig 
+inherit meson pkgconfig
 
 S = "${WORKDIR}/git"
 
