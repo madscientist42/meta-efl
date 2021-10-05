@@ -10,7 +10,7 @@ DEPENDS += " \
 # Require all of Enlightenment and EFL's functional core and it's dependencies
 # if we're specified.  Technically, this is universal, but right now we're still
 # only really used if we're in meta-efl, soo...Enlightenment's a requirement.
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
     enlightenment \
     "
 

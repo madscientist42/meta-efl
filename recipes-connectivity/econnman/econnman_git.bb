@@ -8,7 +8,7 @@ DEPENDS += " \
     "
 
 # Require all of EFL's functional core and it's dependencies if we're specified...
-RDEPENDS_${PN} = "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus python3 python3-configargparse"
+RDEPENDS:${PN} = "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus python3 python3-configargparse"
 
 SRC_URI = " \
     git://git.enlightenment.org/apps/econnman.git;protocol=https \
@@ -38,4 +38,4 @@ EXTRA_OECONF = " \
 
 # There's something about this where YOCTO can't figure out that I specified "python3" in my RDEPS for
 # this recipe...SO, tell it to skip that sanity check.
-INSANE_SKIP_${PN} = "file-rdeps"
+INSANE_SKIP:${PN} = "file-rdeps"

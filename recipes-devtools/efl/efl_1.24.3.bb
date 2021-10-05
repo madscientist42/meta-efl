@@ -36,7 +36,7 @@ DEPENDS += " \
 	gstreamer1.0-plugins-bad \
     "
 
-DEPENDS_class-native += " \
+DEPENDS:class-native += " \
     luajit-native \
     libjpeg-turbo-native \
     libpng-native \
@@ -49,7 +49,7 @@ DEPENDS_class-native += " \
     libsndfile1-native \
     "
 
-DEPENDS_class-nativesdk += " \
+DEPENDS:class-nativesdk += " \
     efl-native \
     nativesdk-libjpeg-turbo \
     nativesdk-giflib \
@@ -64,7 +64,7 @@ DEPENDS_class-nativesdk += " \
     nativesdk-libsndfile1 \
     "
 
-RDEPENDS_nativesdk-${PN} = "\
+RDEPENDS:nativesdk-${PN} = "\
     nativesdk-openssl \
     nativesdk-luajit \
     nativesdk-libjpeg-turbo \
@@ -120,6 +120,7 @@ EXTRA_OEMESON_append_class-target = " \
     -Decore-imf-loaders-disabler=scim,ibus \
     -Devas-loaders-disabler=ps,raw \
     -Dopengl=full \
+    -Dfb=true \
     -Dxpresent=true \
     -Dxinput2=true \
     -Dxinput22=true \
@@ -136,108 +137,108 @@ NATIVE_MESON_CONFIG = " \
     -Devas-loaders-disabler=gst,pdf,ps,raw,xcf,dds,eet,rsvg,generic,pmaps,psd,tga,tgv,wbmp,webp,xpm,json,jp2k \
     "
 
-EXTRA_OEMESON_append_class-native = "${NATIVE_MESON_CONFIG}"
-EXTRA_OECONF_append_class-nativesdk = "${NATIVE_MESON_CONFIG}"
+EXTRA_OEMESON:append:class-native = "${NATIVE_MESON_CONFIG}"
+EXTRA_OECONF:append:class-nativesdk = "${NATIVE_MESON_CONFIG}"
 
 BBCLASSEXTEND = "native nativesdk"
 
 # Start defining all the packagings for this...
 PACKAGES =+ "edje-utils embryo-utils embryo-tests efreet-trash efreet-mime libeet libefreet ecore-audio ecore-input-evas ecore-input ecore-imf-evas ecore-imf ecore-file ecore-con ecore-ipc ecore-x ecore-evas libemotion eo ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus elua elementary elementary-dev elementary-themes elementary-configs elementary-tests"
 
-FILES_efreet-trash = " \
+FILES:efreet-trash = " \
     ${libdir}/libefreet_trash${SOLIBS} \
     "
 
-FILES_efreet-mime = " \
+FILES:efreet-mime = " \
     ${libdir}/libefreet_mime${SOLIBS} \
     "
 
-FILES_libeet = " \
+FILES:libeet = " \
     ${libdir}/libeet${SOLIBS} \
     "
 
-FILES_libefreet = " \
+FILES:libefreet = " \
     ${libdir}/libefreet${SOLIBS} \
     "
 
-FILES_ecore-audio = "\
+FILES:ecore-audio = "\
     ${libdir}/libecore_audio${SOLIBS} \
     "
 
-FILES_ecore-input-evas = "\
+FILES:ecore-input-evas = "\
     ${libdir}/libecore_input_evas${SOLIBS} \
     "
 
-FILES_ecore-input = "\
+FILES:ecore-input = "\
     ${libdir}/libecore_input${SOLIBS} \
     "
 
-FILES_ecore-imf-evas = "\
+FILES:ecore-imf-evas = "\
     ${libdir}/libecore_imf_evas${SOLIBS} \
     ${libdir}/ecore-imf/modules/*/*/module.so \
     "
 
-FILES_ecore-imf = "\
+FILES:ecore-imf = "\
     ${libdir}/libecore_imf${SOLIBS} \
     "
 
-FILES_ecore-file = "\
+FILES:ecore-file = "\
     ${libdir}/libecore_file${SOLIBS} \
     "
 
-FILES_ecore-con = "\
+FILES:ecore-con = "\
     ${libdir}/libecore_con${SOLIBS} \
     ${libdir}/ecore_con/utils/v-1.22/efl_net_proxy_helper \
     "
 
-FILES_ecore-ipc = "\
+FILES:ecore-ipc = "\
     ${libdir}/libecore_ipc${SOLIBS} \
     "
 
-FILES_ecore-x = "\
+FILES:ecore-x = "\
     ${libdir}/libecore_x${SOLIBS} \
     ${libdir}/ecore_x/bin/v-*/ecore_x_vsync \
     "
 
-FILES_ecore-evas = "\
+FILES:ecore-evas = "\
     ${libdir}/libecore_evas${SOLIBS} \
     ${libdir}/ecore-evas/engines/*/*/module.so \
     "
 
-FILES_eio = "\
+FILES:eio = "\
     ${libdir}/libeio${SOLIBS} \
     "
 
-FILES_eina = "\
+FILES:eina = "\
     ${libdir}/libeina${SOLIBS} \
     ${bindir}/eina-bench-cmp \
     "
 
-FILES_edje-utils = "\
+FILES:edje-utils = "\
     ${bindir}/edje_* \
     ${datadir}/edje/include/edje.inc \
     "
 
-FILES_eldbus = "\
+FILES:eldbus = "\
     ${libdir}/libeldbus${SOLIBS} \
     "
 
-FILES_eo = "\
+FILES:eo = "\
     ${libdir}/libeo${SOLIBS} \
     "
 
-FILES_libemotion = "\
+FILES:libemotion = "\
     ${libdir}/libemotion${SOLIBS} \
     "
 
-FILES_efreet = " \
+FILES:efreet = " \
     ${datadir}/dbus-1/services/*Efreet* \
     ${libdir}/efreet/*/efreet*create \
     ${bindir}/efreetd \
     ${datadir}/efreet \
     "
 
-FILES_eet = " \
+FILES:eet = " \
     ${bindir}/eet \
     ${bindir}/eetpack \
     ${bindir}/vieet \
@@ -245,24 +246,24 @@ FILES_eet = " \
     ${libdir}/libeet${SOLIBS} \
     "
 
-FILES_emotion = " \
+FILES:emotion = " \
     ${datadir}/emotion \
     ${libdir}/emotion/modules/gstreamer1/*/module.so \
     "
 
-FILES_embryo-tests = " \
+FILES:embryo-tests = " \
     ${datadir}/embryo/ \
     "
 
-FILES_embryo-utils = " \
+FILES:embryo-utils = " \
     ${binddir}/embryo_* \
     "
 
-FILES_embryo = " \
+FILES:embryo = " \
     ${libdir}/libembryo${SOLIBS} \
     "
 
-FILES_ethumb = " \
+FILES:ethumb = " \
     ${datadir}/dbus-1/services/*Ethumb* \
     ${libdir}/libethumb${SOLIBS} \
     ${libdir}/libethumb_client${SOLIBS} \
@@ -275,27 +276,27 @@ FILES_ethumb = " \
     ${datadir}/ethumb* \
     "
 
-FILES_ecore = " \
+FILES:ecore = " \
     ${libdir}/libecore${SOLIBS} \
     ${libdir}/ecore* \
     ${datadir}/ecore* \
     "
 
-FILES_evas = " \
+FILES:evas = " \
     ${libdir}/libevas${SOLIBS} \
     ${libdir}/evas* \
     ${datadir}/evas* \
     ${bindir}/evas_cserve2_* \
     "
 
-FILES_eeze = " \
+FILES:eeze = " \
     ${libdir}/libeeze${SOLIBS} \
     ${libdir}/eeze*/*/*/*/*/module.so \
     ${datadir}/eeze \
     ${bindir}/eeze_* \
     "
 
-FILES_edje = " \
+FILES:edje = " \
     ${libdir}/libedje${SOLIBS} \
     ${libdir}/edje*/*/*/*/module.so \
     ${libdir}/edje/utils/*/epp \
@@ -303,37 +304,37 @@ FILES_edje = " \
     ${datadir}/mime \
     "
 
-FILES_elua = " \
+FILES:elua = " \
     ${bindir}/elua \
     ${datadir}/elua \
     "
 
-FILES_elementary += "\
+FILES:elementary += "\
     ${libdir}/edje/modules/elm \
     ${libdir}/elementary/* \
     ${prefix}/share/elementary/edje_externals/* \
     "
 
-FILES_elementary-dev += "\
+FILES:elementary-dev += "\
     ${bindir}/elm_prefs_cc \
     ${libdir}/elementary/modules/*/*/module.la \
     ${libdir}/cmake \
     "
 
-FILES_elementary-themes = "\
+FILES:elementary-themes = "\
     ${datadir}/elementary/themes \
     "
 
-FILES_elementary-configs = "\
+FILES:elementary-configs = "\
     ${datadir}/elementary/config \
     "
 
-FILES_elementary-dbg += "\
+FILES:elementary-dbg += "\
     ${libdir}/elementary/modules/*/*/.debug \
     ${libdir}/edje/modules/elm/*/.debug \
     "
 
-FILES_elementary-tests = "\
+FILES:elementary-tests = "\
     ${bindir}/elementary* \
     ${datadir}/elementary/images \
     ${datadir}/elementary/objects \
@@ -345,7 +346,7 @@ FILES_elementary-tests = "\
     ${prefix}/share/elementary/test* \
     "
 
-FILES_${PN}-dev += " \
+FILES:${PN}-dev += " \
     ${libdir}/cmake \
     ${libdir}/ecore*/*/*/*/module.la \
     ${libdir}/evas*/*/*/*/*/module.la \

@@ -10,7 +10,7 @@ DEPENDS += " \
     "
 
 # Require all of EFL's functional core and it's dependencies if we're specified...
-RDEPENDS_${PN} = "ecore edje edje-utils eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
+RDEPENDS:${PN} = "ecore edje edje-utils eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
 
 SRC_URI = " \
     git://git.enlightenment.org/tools/enventor.git;protocol=https \
@@ -27,7 +27,7 @@ S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig gettext
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     /usr/share \
     "
 

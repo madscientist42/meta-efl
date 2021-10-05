@@ -15,7 +15,7 @@ DEPENDS = " \
     efl \
     "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
     eet \
     evas \
     ecore-con \
@@ -29,13 +29,13 @@ inherit cmake pkgconfig efl-theme
 
 # Override behavior here - we want the lib and the bin in the same package.
 PACKAGES = "${PN} ${PN}-dbg ${PN}-demo"
-FILES_${PN} = " \
+FILES:${PN} = " \
     /usr/bin/exquisite \
     /usr/bin/exquisite_write \
     /usr/lib \
     "
 
-FILES_${PN}-dbg = " \
+FILES:${PN}-dbg = " \
     /usr/bin/.debug \
     "
 
@@ -45,10 +45,10 @@ FILES_${PN}-dbg = " \
 # stone for people to make their own theme setups and bootsplashes
 # with this accordingly as it's almost more a bootsplash toolkit
 # unlike with psplash and usplash
-FILES_${PN}_remove += " \
+FILES:${PN}:remove += " \
     /usr/share/efl-themes/exquisite/default.edj \
     "
-FILES_${PN}-demo = " \
+FILES:${PN}-demo = " \
     /usr/share \
     "
 

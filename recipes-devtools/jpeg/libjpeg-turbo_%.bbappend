@@ -2,6 +2,6 @@
 BBCLASSEXTEND += " nativesdk"
 
 # Extend the class dependencies to including nasm-native...
-DEPENDS_class-nativesdk += " \
+DEPENDS:class-nativesdk += " \
     nasm-native \
     "

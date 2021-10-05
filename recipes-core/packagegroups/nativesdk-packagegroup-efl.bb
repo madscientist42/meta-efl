@@ -1,9 +1,9 @@
-DESCRIPTION = "EFL nativesdk packagegroup" 
+DESCRIPTION = "EFL nativesdk packagegroup"
 PR = "r1"
 
 inherit packagegroup
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
     nativesdk-ecore \
     nativesdk-edje \
     nativesdk-edje-utils \
@@ -17,7 +17,7 @@ RDEPENDS_${PN} = " \
     nativesdk-emotion \
     nativesdk-ethumb \
     nativesdk-evas \
-    nativesdk-eldbus \    
+    nativesdk-eldbus \
     "
 
 

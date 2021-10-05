@@ -12,7 +12,7 @@ DEPENDS += " \
     "
 
 # Require all of EFL's functional core and it's dependencies if we're specified...
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
     luajit \
     libx11 \
     libxcursor \
@@ -104,7 +104,7 @@ EXTRA_OEMESON = " \
     "
 
 # Append one file to the end of the list...
-FILES_${PN} += " \
+FILES:${PN} += " \
     /usr/share/xsessions/enlightenment.desktop \
     /usr/share/icons \
     "

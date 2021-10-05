@@ -23,18 +23,18 @@ inherit meson
 
 # Force the libraries to be part of the main package and the pkgconfig, includes, etc.
 # to be a -dev package...
-FILES_${PN} = " \
+FILES:${PN} = " \
     /usr/lib/librlottie-image-loader.so \
     /usr/lib/librlottie.so \
     /usr/lib/librlottie.so.0.2 \
     /usr/lib/librlottie.so.0 \
     "
 
-FILES_${PN}-dev = " \
+FILES:${PN}-dev = " \
     /usr/include \
     /usr/lib/pkgconfig \
     "
 
 # The upstream we're packaging framed it in a dev-so "problem" way- the thing is?
 # It's legit and Yocto is complaining about something I can't easily fix...so...
-INSANE_SKIP_${PN} = "dev-so"
+INSANE_SKIP:${PN} = "dev-so"
