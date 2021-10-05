@@ -1,0 +1,29 @@
+From 3020ee08263e160d7459f09f206403dc5ef2bf40 Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Sun, 28 Feb 2021 11:06:11 -0600
+Subject: Fix an oops in things.
+
+Since E's probably not turning a few things off like we are in
+Yocto right at the moment with meta-efl, they probably don't know
+(or even notice) this fail.  Under the right conditions, this
+of compiles.  What gives is that if, at the top, you've
+so we get, unsurprisingly, a compile fail.  Will work out what
+needs to go upstream (Probably just a bug report...) but we
+want/need this compiling now...not after they get to the oops.
+
+diff --git a/src/modules/wizard/page_120.c b/src/modules/wizard/page_120.c
+index 1c8fbbf1a..4ab5bd8b7 100644
+--- a/src/modules/wizard/page_120.c
++++ b/src/modules/wizard/page_120.c
+@@ -116,10 +116,10 @@ wizard_page_show(E_Wizard_Page *pg EINA_UNUSED)
+ 
+ #ifdef HAVE_EEZE
+    tempdevs = eeze_udev_find_by_type(EEZE_UDEV_TYPE_IS_IT_HOT_OR_IS_IT_COLD_SENSOR, NULL);
+-#endif
+    if (tempdevs && (eina_list_count(tempdevs)))
+      hav_temperature = 1;
+    else
++#endif
+      {
+         int i = 0;
+ 

@@ -2,6 +2,9 @@ SUMMARY = "Enlightenment Foundation Libraries"
 LICENSE = "BSD & LGPLv2"
 HOMEPAGE = "https://www.enlightenment.org"
 
+# Compute the first two digits of ${PV} as Base PV...
+BPV = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
+
 DEPENDS += " \
     efl-native \
     luajit \
@@ -12,19 +15,20 @@ DEPENDS += " \
     libxrandr \
     libxtst \
     libxscrnsaver \
+    libxpresent \
     harfbuzz \
     fribidi \
     libjpeg-turbo \
     libpng \
     giflib \
-    tiff \ 
+    tiff \
     freetype \
     poppler \
-    avahi \
-    util-linux \
     librsvg \
+    rlottie \
+    util-linux \
     eudev \
-    libsndfile1 \    
+    libsndfile1 \
     gstreamer1.0 \
 	gstreamer1.0-libav \
 	gstreamer1.0-plugins-base \
@@ -32,41 +36,40 @@ DEPENDS += " \
 	gstreamer1.0-plugins-bad \
     "
 
-DEPENDS_class-native += " \
-    openssl-native \
+DEPENDS:class-native += " \
     luajit-native \
     libjpeg-turbo-native \
+    libpng-native \
     giflib-native \
-    tiff-native \ 
+    tiff-native \
+    librsvg-native \
     freetype-native \
     util-linux-native \
-    gettext-native \
-    glib-2.0-native \
     dbus-native \
-    libpng-native \
+    libsndfile1-native \
     "
 
-DEPENDS_class-nativesdk += " \
+DEPENDS:class-nativesdk += " \
     efl-native \
-    nativesdk-openssl \
-    nativesdk-luajit \
     nativesdk-libjpeg-turbo \
     nativesdk-giflib \
-    nativesdk-tiff \ 
+    nativesdk-tiff \
+    nativesdk-libpng \
+    nativesdk-librsvg \
     nativesdk-freetype \
     nativesdk-util-linux \
     nativesdk-gettext \
     nativesdk-glib-2.0 \
     nativesdk-dbus \
-    nativesdk-libpng \
+    nativesdk-libsndfile1 \
     "
 
-RDEPENDS_nativesdk-${PN} = "\
+RDEPENDS:nativesdk-${PN} = "\
     nativesdk-openssl \
     nativesdk-luajit \
     nativesdk-libjpeg-turbo \
     nativesdk-giflib \
-    nativesdk-tiff \ 
+    nativesdk-tiff \
     nativesdk-freetype \
     nativesdk-util-linux \
     nativesdk-gettext \
@@ -75,221 +78,167 @@ RDEPENDS_nativesdk-${PN} = "\
     nativesdk-libpng \
     nativesdk-nasm \
     "
-    
+
 PROVIDES += "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
 
 SRC_URI = " \
-    git://git.enlightenment.org/core/efl.git;protocol=https;branch=efl-1.22 \
+    git://git.enlightenment.org/core/efl.git;protocol=https;branch=efl-${BPV} \
 	"
 
-SRCREV = "v1.22.2"
+SRCREV = "v${PV}"
 
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=e5f6e713fdebf1237adf5c87de8255d8 \
+    file://COPYING;md5=e12e5c3b6822d51c620d5d05a7397c5c \
     "
 
-inherit autotools pkgconfig gettext
+inherit meson pkgconfig gettext mime
 
 S = "${WORKDIR}/git"
 
-EXTRA_OECONF = " \
-    --disable-doc \
-    --disable-rpath \
-    --disable-systemd \
-    --disable-pulseaudio \
-    --disable-spectre \
-    --disable-libraw \
-    --disable-physics \
+
+# Because of the above, we're rather a MACHINE specific buildset for this part of
+# things...
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+# Core rules for build.  This is things that're generic for all BBCLASSes...things we
+# explicitly support out of box (or not...usually not...) for any case of things.
+#
+# FIXME : We need to properly integrate PKGCONFIG support for systemd and pulseaudio
+#         at some point in the near future...
+#
+EXTRA_OEMESON = " \
+    -Dsystemd=false \
+    -Dpulseaudio=false \
+    -Dbuild-examples=false \
+    -Dbuild-tests=false \
+    -Dphysics=false \
     "
 
 # Handle the needs of the Target build- including specifying the efl-native tools
 # to do content generation...
-EXTRA_OECONF_append_class-target = " \
-    --enable-harfbuzz \
-    --enable-fribidi \
-    --with-opengl=full \
-    --with-pic \
-    --with-x \
-    --with-x11=xlib \
-    --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
-    --with-eolian-gen=${STAGING_BINDIR_NATIVE}/eolian_gen \
-    --with-eolian-cxx=${STAGING_BINDIR_NATIVE}/eolian_cxx \
-    --with-elua=${STAGING_BINDIR_NATIVE}/elua \
-    --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
-    --with-elementary-codegen=${STAGING_BINDIR_NATIVE}/elementary_codegen \
-    --with-elm-prefs-cc=${STAGING_BINDIR_NATIVE}/elm_prefs_cc \
+EXTRA_OEMESON_append_class-target = " \
+    -Decore-imf-loaders-disabler=scim,ibus \
+    -Devas-loaders-disabler=ps,raw \
+    -Dopengl=full \
+    -Dfb=true \
+    -Dxpresent=true \
+    -Dxinput2=true \
+    -Dxinput22=true \
     "
 
-EXTRA_OECONF_append_class-native = " \
-    --disable-fontconfig \
-    --disable-audio \
-    --disable-multisense \
-    --disable-libeeze \
-    --with-x11=none \
-    --disable-harfbuzz \
-    --disable-fribidi \
-    --disable-image-loader-bmp \
-    --disable-image-loader-eet \
-    --disable-image-loader-generic \
-    --disable-image-loader-gif \
-    --disable-image-loader-ico \
-    --disable-image-loader-jp2k \
-    --disable-image-loader-pmaps \
-    --disable-image-loader-psd \
-    --disable-image-loader-tga \
-    --disable-image-loader-wbmp \
-    --disable-image-loader-webp \
-    --disable-image-loader-xpm \
-    --disable-image-loader-tgv \
-    --disable-image-loader-dds \
-    --disable-gstreamer1 \
-    --disable-poppler \
-    --disable-avahi \
-    --disable-librsvg \
+NATIVE_MESON_CONFIG = " \
+    -Dharfbuzz=false \
+    -Dfribidi=false \
+    -Deeze=false \
+    -Dx11=false \
+    -Dopengl=none \
+    -Dgstreamer=false \
+    -Dedje-sound-and-video=false \
+    -Devas-loaders-disabler=gst,pdf,ps,raw,xcf,dds,eet,rsvg,generic,pmaps,psd,tga,tgv,wbmp,webp,xpm,json,jp2k \
     "
 
-EXTRA_OECONF_append_class-nativesdk = " \
-    --disable-fontconfig \
-    --disable-audio \
-    --disable-multisense \
-    --disable-libeeze \
-    --with-x11=none \
-    --disable-harfbuzz \
-    --disable-fribidi \
-    --disable-image-loader-bmp \
-    --disable-image-loader-eet \
-    --disable-image-loader-generic \
-    --disable-image-loader-gif \
-    --disable-image-loader-ico \
-    --disable-image-loader-jp2k \
-    --disable-image-loader-pmaps \
-    --disable-image-loader-psd \
-    --disable-image-loader-tga \
-    --disable-image-loader-wbmp \
-    --disable-image-loader-webp \
-    --disable-image-loader-xpm \
-    --disable-image-loader-tgv \
-    --disable-image-loader-dds \
-    --disable-gstreamer1 \
-    --disable-poppler \
-    --disable-avahi \
-    --disable-librsvg \
-    --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
-    --with-eolian-gen=${STAGING_BINDIR_NATIVE}/eolian_gen \
-    --with-eolian-cxx=${STAGING_BINDIR_NATIVE}/eolian_cxx \
-    --with-elua=${STAGING_BINDIR_NATIVE}/elua \
-    --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
-    --with-elementary-codegen=${STAGING_BINDIR_NATIVE}/elementary_codegen \
-    --with-elm-prefs-cc=${STAGING_BINDIR_NATIVE}/elm_prefs_cc \
-    "
+EXTRA_OEMESON:append:class-native = "${NATIVE_MESON_CONFIG}"
+EXTRA_OECONF:append:class-nativesdk = "${NATIVE_MESON_CONFIG}"
 
 BBCLASSEXTEND = "native nativesdk"
-
-# Now handle processing special cases for tasks...  There's going to be a few...  (Sigh...)
-do_autotools_fixes() {
-    # Give autotools a binky- it won't backfill this and they've thoughtfully .gitignored it.
-    touch ${S}/ABOUT-NLS
-}
-do_patch[postfuncs] += "do_autotools_fixes "
-
 
 # Start defining all the packagings for this...
 PACKAGES =+ "edje-utils embryo-utils embryo-tests efreet-trash efreet-mime libeet libefreet ecore-audio ecore-input-evas ecore-input ecore-imf-evas ecore-imf ecore-file ecore-con ecore-ipc ecore-x ecore-evas libemotion eo ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus elua elementary elementary-dev elementary-themes elementary-configs elementary-tests"
 
-FILES_efreet-trash = " \
+FILES:efreet-trash = " \
     ${libdir}/libefreet_trash${SOLIBS} \
     "
 
-FILES_efreet-mime = " \
+FILES:efreet-mime = " \
     ${libdir}/libefreet_mime${SOLIBS} \
     "
 
-FILES_libeet = " \
+FILES:libeet = " \
     ${libdir}/libeet${SOLIBS} \
     "
-    
-FILES_libefreet = " \
+
+FILES:libefreet = " \
     ${libdir}/libefreet${SOLIBS} \
     "
 
-FILES_ecore-audio = "\
+FILES:ecore-audio = "\
     ${libdir}/libecore_audio${SOLIBS} \
     "
 
-FILES_ecore-input-evas = "\
+FILES:ecore-input-evas = "\
     ${libdir}/libecore_input_evas${SOLIBS} \
     "
 
-FILES_ecore-input = "\
+FILES:ecore-input = "\
     ${libdir}/libecore_input${SOLIBS} \
     "
 
-FILES_ecore-imf-evas = "\
+FILES:ecore-imf-evas = "\
     ${libdir}/libecore_imf_evas${SOLIBS} \
     ${libdir}/ecore-imf/modules/*/*/module.so \
     "
 
-FILES_ecore-imf = "\
+FILES:ecore-imf = "\
     ${libdir}/libecore_imf${SOLIBS} \
     "
 
-FILES_ecore-file = "\
+FILES:ecore-file = "\
     ${libdir}/libecore_file${SOLIBS} \
     "
 
-FILES_ecore-con = "\
+FILES:ecore-con = "\
     ${libdir}/libecore_con${SOLIBS} \
     ${libdir}/ecore_con/utils/v-1.22/efl_net_proxy_helper \
     "
 
-FILES_ecore-ipc = "\
+FILES:ecore-ipc = "\
     ${libdir}/libecore_ipc${SOLIBS} \
     "
 
-FILES_ecore-x = "\
+FILES:ecore-x = "\
     ${libdir}/libecore_x${SOLIBS} \
     ${libdir}/ecore_x/bin/v-*/ecore_x_vsync \
     "
 
-FILES_ecore-evas = "\
+FILES:ecore-evas = "\
     ${libdir}/libecore_evas${SOLIBS} \
     ${libdir}/ecore-evas/engines/*/*/module.so \
     "
 
-FILES_eio = "\
+FILES:eio = "\
     ${libdir}/libeio${SOLIBS} \
     "
 
-FILES_eina = "\
+FILES:eina = "\
     ${libdir}/libeina${SOLIBS} \
     ${bindir}/eina-bench-cmp \
     "
 
-FILES_edje-utils = "\
+FILES:edje-utils = "\
     ${bindir}/edje_* \
     ${datadir}/edje/include/edje.inc \
     "
 
-FILES_eldbus = "\
+FILES:eldbus = "\
     ${libdir}/libeldbus${SOLIBS} \
     "
 
-FILES_eo = "\
+FILES:eo = "\
     ${libdir}/libeo${SOLIBS} \
     "
 
-FILES_libemotion = "\
+FILES:libemotion = "\
     ${libdir}/libemotion${SOLIBS} \
     "
 
-FILES_efreet = " \
+FILES:efreet = " \
     ${datadir}/dbus-1/services/*Efreet* \
     ${libdir}/efreet/*/efreet*create \
     ${bindir}/efreetd \
     ${datadir}/efreet \
     "
 
-FILES_eet = " \
+FILES:eet = " \
     ${bindir}/eet \
     ${bindir}/eetpack \
     ${bindir}/vieet \
@@ -297,24 +246,24 @@ FILES_eet = " \
     ${libdir}/libeet${SOLIBS} \
     "
 
-FILES_emotion = " \
+FILES:emotion = " \
     ${datadir}/emotion \
     ${libdir}/emotion/modules/gstreamer1/*/module.so \
     "
 
-FILES_embryo-tests = " \
+FILES:embryo-tests = " \
     ${datadir}/embryo/ \
     "
 
-FILES_embryo-utils = " \
+FILES:embryo-utils = " \
     ${binddir}/embryo_* \
     "
 
-FILES_embryo = " \
+FILES:embryo = " \
     ${libdir}/libembryo${SOLIBS} \
     "
 
-FILES_ethumb = " \
+FILES:ethumb = " \
     ${datadir}/dbus-1/services/*Ethumb* \
     ${libdir}/libethumb${SOLIBS} \
     ${libdir}/libethumb_client${SOLIBS} \
@@ -327,27 +276,27 @@ FILES_ethumb = " \
     ${datadir}/ethumb* \
     "
 
-FILES_ecore = " \
+FILES:ecore = " \
     ${libdir}/libecore${SOLIBS} \
-    ${libdir}/ecore*/*/*/*/module.so \
+    ${libdir}/ecore* \
     ${datadir}/ecore* \
     "
 
-FILES_evas = " \
+FILES:evas = " \
     ${libdir}/libevas${SOLIBS} \
     ${libdir}/evas* \
     ${datadir}/evas* \
     ${bindir}/evas_cserve2_* \
     "
 
-FILES_eeze = " \
+FILES:eeze = " \
     ${libdir}/libeeze${SOLIBS} \
     ${libdir}/eeze*/*/*/*/*/module.so \
     ${datadir}/eeze \
     ${bindir}/eeze_* \
     "
 
-FILES_edje = " \
+FILES:edje = " \
     ${libdir}/libedje${SOLIBS} \
     ${libdir}/edje*/*/*/*/module.so \
     ${libdir}/edje/utils/*/epp \
@@ -355,37 +304,37 @@ FILES_edje = " \
     ${datadir}/mime \
     "
 
-FILES_elua = " \
+FILES:elua = " \
     ${bindir}/elua \
     ${datadir}/elua \
     "
 
-FILES_elementary += "\
+FILES:elementary += "\
     ${libdir}/edje/modules/elm \
     ${libdir}/elementary/* \
     ${prefix}/share/elementary/edje_externals/* \
     "
 
-FILES_elementary-dev += "\
+FILES:elementary-dev += "\
     ${bindir}/elm_prefs_cc \
     ${libdir}/elementary/modules/*/*/module.la \
     ${libdir}/cmake \
     "
 
-FILES_elementary-themes = "\
+FILES:elementary-themes = "\
     ${datadir}/elementary/themes \
     "
 
-FILES_elementary-configs = "\
+FILES:elementary-configs = "\
     ${datadir}/elementary/config \
     "
 
-FILES_elementary-dbg += "\
+FILES:elementary-dbg += "\
     ${libdir}/elementary/modules/*/*/.debug \
     ${libdir}/edje/modules/elm/*/.debug \
     "
 
-FILES_elementary-tests = "\
+FILES:elementary-tests = "\
     ${bindir}/elementary* \
     ${datadir}/elementary/images \
     ${datadir}/elementary/objects \
@@ -397,7 +346,7 @@ FILES_elementary-tests = "\
     ${prefix}/share/elementary/test* \
     "
 
-FILES_${PN}-dev += " \
+FILES:${PN}-dev += " \
     ${libdir}/cmake \
     ${libdir}/ecore*/*/*/*/module.la \
     ${libdir}/evas*/*/*/*/*/module.la \
@@ -407,5 +356,7 @@ FILES_${PN}-dev += " \
     ${libdir}/emotion/modules/gstreamer1/*/module.la \
     ${datadir}/gdb/auto-load \
     ${datadir}/eo/gdb \
+    ${datadir}/exactness \
+    ${datadir}/eolian \
     ${bindir}/eldbus-codegen \
-"
+    "

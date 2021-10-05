@@ -3,7 +3,7 @@ PR = "r1"
 
 inherit packagegroup
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
     enlightenment \
     entrance \
     econnman \
@@ -13,7 +13,6 @@ RDEPENDS_${PN} = " \
     epour \
     equate \
     eruler \
-    espionage \
     rage \
     terminology \
     "
