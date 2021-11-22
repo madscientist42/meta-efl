@@ -3,6 +3,10 @@ PR = "r1"
 
 inherit packagegroup
 
+# FIXME -- Peeled out for now because it doesn't build right:
+#
+# epour
+#
 RDEPENDS:${PN} = " \
     enlightenment \
     entrance \
@@ -10,9 +14,10 @@ RDEPENDS:${PN} = " \
     ecrire \
     emprint \
     ephoto \
-    epour \
     equate \
     eruler \
+    evisum \
+    express \
     rage \
     terminology \
     "

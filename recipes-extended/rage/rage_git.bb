@@ -14,10 +14,10 @@ SRC_URI = " \
     git://git.enlightenment.org/apps/rage.git;protocol=https \
 	"
 
-SRCREV = "95cb9155572e84bcb12b9b30c3b0bff3a0263b70"
+SRCREV = "52943e5ec7275a1dc8190cc44a1293414ba02619"
 
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=3890ab2189145a682727902e7fc644e2 \
+    file://COPYING;md5=22b8ca1483549618ee95058bb1e79268 \
     "
 
 inherit meson pkgconfig

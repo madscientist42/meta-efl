@@ -15,7 +15,7 @@ SRC_URI = " \
     file://fix_meson_build_for_oe.patch \
 	"
 
-SRCREV = "d0ec29d753f01abcbe4dc355b8817401784daa70"
+SRCREV = "4b71bb9e1b8bea28b8c7c2e7a64eea810bc142b5"
 
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=b38a3b30bb84860010f6658bd0515272 \
