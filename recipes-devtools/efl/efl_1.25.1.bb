@@ -5,6 +5,7 @@ HOMEPAGE = "https://www.enlightenment.org"
 # Compute the first two digits of ${PV} as Base PV...
 BPV = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
 
+
 DEPENDS += " \
     efl-native \
     luajit \
@@ -116,9 +117,14 @@ EXTRA_OEMESON = " \
 
 # Handle the needs of the Target build- including specifying the efl-native tools
 # to do content generation...
+#
+# FIXME : We're crippling a few things that would make sense in a desktop but less
+#         so in 4/5ths of the embedded contexts.  We probably want to fix that.
+#         (Also, it seems we don't have the version of libavif pinned down for this...
+#          it certainly isn't the latest stable because there's number of param probs.)
 EXTRA_OEMESON_append_class-target = " \
     -Decore-imf-loaders-disabler=scim,ibus \
-    -Devas-loaders-disabler=ps,raw \
+    -Devas-loaders-disabler=ps,raw,avif \
     -Dopengl=full \
     -Dfb=true \
     -Dxpresent=true \
@@ -134,7 +140,7 @@ NATIVE_MESON_CONFIG = " \
     -Dopengl=none \
     -Dgstreamer=false \
     -Dedje-sound-and-video=false \
-    -Devas-loaders-disabler=gst,pdf,ps,raw,xcf,dds,eet,rsvg,generic,pmaps,psd,tga,tgv,wbmp,webp,xpm,json,jp2k \
+    -Devas-loaders-disabler=gst,pdf,ps,raw,xcf,dds,eet,rsvg,generic,pmaps,psd,tga,tgv,wbmp,webp,xpm,json,jp2k,avif \
     "
 
 EXTRA_OEMESON:append:class-native = "${NATIVE_MESON_CONFIG}"

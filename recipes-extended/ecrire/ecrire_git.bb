@@ -14,13 +14,13 @@ SRC_URI = " \
     git://git.enlightenment.org/apps/ecrire.git;protocol=https \
 	"
 
-SRCREV = "a2980856b7d1bb960bb7612e4042e034f530da9c"
+SRCREV = "ea7c0240194fe611f3bf85fe0d060b1be11e9c1c"
 
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
     "
 
-inherit cmake pkgconfig
+inherit meson
 
 S = "${WORKDIR}/git"
 
