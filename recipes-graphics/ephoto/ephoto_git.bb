@@ -16,13 +16,14 @@ SRC_URI = " \
 	"
 
 SRCREV = "4b71bb9e1b8bea28b8c7c2e7a64eea810bc142b5"
+PV = "git+${SRCPV}"
 
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=b38a3b30bb84860010f6658bd0515272 \
     file://COPYING.thumbnailer;md5=a2bd1b78fe4bf5d4bf9018587d03bb5c \
     "
 
-inherit meson pkgconfig
+inherit meson pkgconfig mime-xdg
 
 S = "${WORKDIR}/git"
 
