@@ -122,7 +122,7 @@ EXTRA_OEMESON = " \
 #         so in 4/5ths of the embedded contexts.  We probably want to fix that.
 #         (Also, it seems we don't have the version of libavif pinned down for this...
 #          it certainly isn't the latest stable because there's number of param probs.)
-EXTRA_OEMESON_append_class-target = " \
+EXTRA_OEMESON:append:class-target = " \
     -Decore-imf-loaders-disabler=scim,ibus \
     -Devas-loaders-disabler=ps,raw,avif \
     -Dopengl=full \
