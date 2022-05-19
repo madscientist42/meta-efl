@@ -83,7 +83,7 @@ RDEPENDS:nativesdk-${PN} = "\
 PROVIDES += "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
 
 SRC_URI = " \
-    git://git.enlightenment.org/core/efl.git;protocol=https;branch=efl-${BPV} \
+    git://git.enlightenment.org/enlightenment/efl.git;protocol=https;branch=efl-${BPV} \
 	"
 
 SRCREV = "v${PV}"

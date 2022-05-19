@@ -76,7 +76,7 @@ RDEPENDS:${PN} = " \
     "
 
 SRC_URI = " \
-    git://git.enlightenment.org/core/enlightenment.git;protocol=https;branch=enlightenment-${BPV} \
+    git://git.enlightenment.org/enlightenment/enlightenment.git;protocol=https;branch=enlightenment-${BPV} \
 	"
 
 SRCREV = "v${PV}"

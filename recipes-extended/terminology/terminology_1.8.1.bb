@@ -14,7 +14,7 @@ DEPENDS += " \
 RDEPENDS:${PN} = "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
 
 SRC_URI = " \
-    git://git.enlightenment.org/apps/terminology.git;protocol=https;branch=terminology-${BPV} \
+    git://git.enlightenment.org/enlightenment/terminology.git;protocol=https;branch=terminology-${BPV} \
 	"
 
 SRCREV = "v${PV}"

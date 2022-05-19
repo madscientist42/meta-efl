@@ -16,7 +16,7 @@ DEPENDS += " \
 RDEPENDS:${PN} = "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus python3 python3-efl python3-dbus"
 
 SRC_URI = " \
-    git://git.enlightenment.org/apps/epour.git;protocol=https \
+    git://git.enlightenment.org/enlightenment/epour.git;protocol=https \
 	"
 
 SRCREV = "028d7873d7c0efbae1d23eddfeb57c95e74c900a"

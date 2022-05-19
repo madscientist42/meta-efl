@@ -16,7 +16,10 @@ SRC_URI = " \
     git://github.com/Samsung/rlottie.git;protocol=https \
     "
 
-SRCREV = "v${PV}"
+
+GIT_HASH ?= "f3eed9a332a924ead06ecd7a3167af7c8a72b68f"
+SRCREV = "${@bb.utils.contains('PV', 'git', '${GIT_HASH}', 'v${PV}', d)}"
+
 S = "${WORKDIR}/git"
 
 inherit meson

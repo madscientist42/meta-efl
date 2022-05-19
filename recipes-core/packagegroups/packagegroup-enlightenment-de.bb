@@ -12,7 +12,6 @@ RDEPENDS:${PN} = " \
     entrance \
     econnman \
     ecrire \
-    emprint \
     ephoto \
     equate \
     eruler \

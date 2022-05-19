@@ -11,7 +11,7 @@ DEPENDS += " \
 RDEPENDS:${PN} = "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
 
 SRC_URI = " \
-    git://git.enlightenment.org/apps/ephoto.git;protocol=https \
+    git://git.enlightenment.org/enlightenment/ephoto.git;protocol=https \
     file://fix_meson_build_for_oe.patch \
 	"
 

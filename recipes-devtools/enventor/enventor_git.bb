@@ -13,7 +13,7 @@ DEPENDS += " \
 RDEPENDS:${PN} = "ecore edje edje-utils eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
 
 SRC_URI = " \
-    git://git.enlightenment.org/tools/enventor.git;protocol=https \
+    git://git.enlightenment.org/enlightenment/enventor.git;protocol=https \
     "
 
 SRCREV = "2832e3197525499fbcdbbfba15c3e808dcc819b2"

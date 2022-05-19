@@ -11,7 +11,7 @@ DEPENDS += " \
 RDEPENDS:${PN} = "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
 
 SRC_URI = " \
-    git://git.enlightenment.org/apps/rage.git;protocol=https \
+    git://git.enlightenment.org/enlightenment/rage.git;protocol=https \
 	"
 
 SRCREV = "52943e5ec7275a1dc8190cc44a1293414ba02619"

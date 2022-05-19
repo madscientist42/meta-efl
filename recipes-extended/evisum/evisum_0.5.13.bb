@@ -14,7 +14,7 @@ DEPENDS += " \
 RDEPENDS:${PN} = "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
 
 SRC_URI = " \
-    git://git.enlightenment.org/apps/evisum.git;protocol=https \
+    git://git.enlightenment.org/enlightenment/evisum.git;protocol=https \
 	"
 
 SRCREV = "v${PV}"

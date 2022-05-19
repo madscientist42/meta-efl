@@ -9,7 +9,7 @@ DEPENDS = " \
     "
 
 SRC_URI = " \
-    git://git.enlightenment.org/apps/express.git;protocol=https \
+    git://git.enlightenment.org/enlightenment/express.git;protocol=https \
     "
 
 SRCREV = "124bfd68b8851968a9f6dc48d47868408338bdc4"

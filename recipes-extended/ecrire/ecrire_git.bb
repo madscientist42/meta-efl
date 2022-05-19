@@ -11,7 +11,7 @@ DEPENDS += " \
 RDEPENDS:${PN} = "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
 
 SRC_URI = " \
-    git://git.enlightenment.org/apps/ecrire.git;protocol=https \
+    git://git.enlightenment.org/enlightenment/ecrire.git;protocol=https \
 	"
 
 SRCREV = "ea7c0240194fe611f3bf85fe0d060b1be11e9c1c"
