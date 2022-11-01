@@ -15,7 +15,7 @@ RDEPENDS:${PN} = " \
     "
 
 SRC_URI = " \
-    git://github.com/Obsidian-StudiosInc/entrance.git;protocol=https \
+    git://github.com/Obsidian-StudiosInc/entrance.git;protocol=https;branch=master \
     file://change_to_sh_instead_of_bash.patch \
 	"
 

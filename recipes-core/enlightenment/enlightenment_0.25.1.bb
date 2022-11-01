@@ -76,13 +76,13 @@ RDEPENDS:${PN} = " \
     "
 
 SRC_URI = " \
-    git://git.enlightenment.org/enlightenment/enlightenment.git;protocol=https;branch=enlightenment-${BPV} \
+    git://git.enlightenment.org/enlightenment/enlightenment.git;protocol=https;branch=v-${BPV}.0 \
 	"
 
-SRCREV = "v${PV}"
+SRCREV = "cae78cbb169f237862faef123e4abaf63a1f5064"
 
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=cf9a72875f2592643ec472b0ca65413a \
+    file://COPYING;md5=e1ed2f444f5f25489cb211dca860bd82 \
     "
 
 inherit meson pkgconfig gettext mime-xdg

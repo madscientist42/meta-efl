@@ -14,10 +14,10 @@ DEPENDS += " \
 RDEPENDS:${PN} = "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
 
 SRC_URI = " \
-    git://git.enlightenment.org/enlightenment/terminology.git;protocol=https;branch=terminology-${BPV} \
+    git://git.enlightenment.org/enlightenment/terminology.git;protocol=https;branch=master \
 	"
 
-SRCREV = "v${PV}"
+SRCREV = "36720f0570f669ce95eeff64d6cf885c1d6fe636"
 
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=5194803f5875ad4c412e4d02eff083af \

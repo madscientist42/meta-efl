@@ -11,7 +11,7 @@ DEPENDS += " \
 RDEPENDS:${PN} = "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
 
 SRC_URI = " \
-    git://git.enlightenment.org/enlightenment/eruler.git;protocol=https \
+    git://git.enlightenment.org/enlightenment/eruler.git;protocol=https;branch=master \
 	"
 
 SRCREV = "ef5c03207c0985a3b42f96d77fcbef995ea86298"

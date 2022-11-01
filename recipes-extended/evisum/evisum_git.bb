@@ -14,10 +14,10 @@ DEPENDS += " \
 RDEPENDS:${PN} = "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
 
 SRC_URI = " \
-    git://git.enlightenment.org/enlightenment/evisum.git;protocol=https \
+    git://git.enlightenment.org/enlightenment/evisum.git;protocol=https;branch=master \
 	"
 
-SRCREV = "v${PV}"
+SRCREV = "38ad17b0384c965b40ff411745e93b64ce27f1aa"
 S = "${WORKDIR}/git"
 
 inherit meson pkgconfig

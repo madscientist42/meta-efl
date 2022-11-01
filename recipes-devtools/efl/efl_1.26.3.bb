@@ -5,7 +5,6 @@ HOMEPAGE = "https://www.enlightenment.org"
 # Compute the first two digits of ${PV} as Base PV...
 BPV = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
 
-
 DEPENDS += " \
     efl-native \
     luajit \
@@ -83,10 +82,10 @@ RDEPENDS:nativesdk-${PN} = "\
 PROVIDES += "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
 
 SRC_URI = " \
-    git://git.enlightenment.org/enlightenment/efl.git;protocol=https;branch=efl-${BPV} \
+    git://git.enlightenment.org/enlightenment/efl.git;protocol=https;branch=v-${BPV}.0 \
 	"
 
-SRCREV = "v${PV}"
+SRCREV = "cfd473bc8a548a7bedf2cff512c6ff2172cc3e81"
 
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=e12e5c3b6822d51c620d5d05a7397c5c \

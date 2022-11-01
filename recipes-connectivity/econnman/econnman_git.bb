@@ -11,7 +11,7 @@ DEPENDS += " \
 RDEPENDS:${PN} = "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus python3 python3-configargparse"
 
 SRC_URI = " \
-    git://git.enlightenment.org/enlightenment/econnman.git;protocol=https \
+    git://git.enlightenment.org/enlightenment/econnman.git;protocol=https;branch=master \
 	"
 
 SRCREV = "18e7be6bf80df6b86965ba93391b205339fc7267"
