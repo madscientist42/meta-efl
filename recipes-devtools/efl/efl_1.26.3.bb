@@ -37,6 +37,8 @@ DEPENDS += " \
     "
 
 DEPENDS:class-native += " \
+    eudev-native \
+    libinput-native \
     luajit-native \
     libjpeg-turbo-native \
     libpng-native \
@@ -47,6 +49,7 @@ DEPENDS:class-native += " \
     util-linux-native \
     dbus-native \
     libsndfile1-native \
+    libxkbcommon-native \
     "
 
 DEPENDS:class-nativesdk += " \
@@ -123,7 +126,7 @@ EXTRA_OEMESON = " \
 #          it certainly isn't the latest stable because there's number of param probs.)
 EXTRA_OEMESON:append:class-target = " \
     -Decore-imf-loaders-disabler=scim,ibus \
-    -Devas-loaders-disabler=ps,raw,avif \
+    -Devas-loaders-disabler=ps,raw,avif,heif \
     -Dopengl=full \
     -Dfb=true \
     -Dxpresent=true \
@@ -134,12 +137,11 @@ EXTRA_OEMESON:append:class-target = " \
 NATIVE_MESON_CONFIG = " \
     -Dharfbuzz=false \
     -Dfribidi=false \
-    -Deeze=false \
     -Dx11=false \
     -Dopengl=none \
     -Dgstreamer=false \
     -Dedje-sound-and-video=false \
-    -Devas-loaders-disabler=gst,pdf,ps,raw,xcf,dds,eet,rsvg,generic,pmaps,psd,tga,tgv,wbmp,webp,xpm,json,jp2k,avif \
+    -Devas-loaders-disabler=gst,pdf,ps,raw,xcf,dds,eet,rsvg,generic,pmaps,psd,tga,tgv,wbmp,webp,xpm,json,jp2k,avif,heif \
     "
 
 EXTRA_OEMESON:append:class-native = "${NATIVE_MESON_CONFIG}"

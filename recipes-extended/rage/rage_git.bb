@@ -1,5 +1,5 @@
 SUMMARY = "EFL Terminal Emulator"
-LICENSE = "BSD"
+LICENSE = "BSD-2-Clause"
 HOMEPAGE = "https://www.enlightenment.org"
 
 DEPENDS += " \
@@ -11,7 +11,7 @@ DEPENDS += " \
 RDEPENDS:${PN} = "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
 
 SRC_URI = " \
-    git://git.enlightenment.org/enlightenment/rage.git;protocol=https \
+    git://git.enlightenment.org/enlightenment/rage.git;protocol=https;branch=master \
 	"
 
 SRCREV = "52943e5ec7275a1dc8190cc44a1293414ba02619"
