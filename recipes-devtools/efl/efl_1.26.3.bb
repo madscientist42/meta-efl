@@ -9,6 +9,7 @@ DEPENDS += " \
     efl-native \
     luajit \
     libx11 \
+    libinput \
     libxcursor \
     libxcomposite \
     libxinerama \
