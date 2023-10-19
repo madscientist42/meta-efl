@@ -321,6 +321,7 @@ FILES:elementary += "\
     ${libdir}/edje/modules/elm \
     ${libdir}/elementary/* \
     ${prefix}/share/elementary/edje_externals/* \
+    ${prefix}/share/elementary/colors/* \
     "
 
 FILES:elementary-dev += "\
