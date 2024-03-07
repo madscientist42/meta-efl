@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = " \
     "
 
 SRC_URI = " \
-    git://github.com/Samsung/rlottie.git;protocol=https \
+    git://github.com/Samsung/rlottie.git;protocol=https;branch=master \
     "
 
 
