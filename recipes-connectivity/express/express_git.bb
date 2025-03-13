@@ -15,7 +15,7 @@ SRC_URI = " \
 SRCREV = "124bfd68b8851968a9f6dc48d47868408338bdc4"
 S = "${WORKDIR}/git"
 
-inherit meson
+inherit meson pkgconfig
 
 FILES:${PN} += " \
     /usr/share \

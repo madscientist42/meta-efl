@@ -1,5 +1,5 @@
 SUMMARY = "Enlightenment Window Manager"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 HOMEPAGE = "https://www.enlightenment.org"
 
 # Compute the first two digits of ${PV} as Base PV...
@@ -9,9 +9,14 @@ DEPENDS += " \
     efl \
     efl-native \
     xcb-util-keysyms \
+    libexif \
     "
 
 # Require all of EFL's functional core and it's dependencies if we're specified...
+#
+# FIXME - Removed the following RDEPENDS to let it package correctly...
+#
+#    ecore-evas
 RDEPENDS:${PN} = " \
     luajit \
     libx11 \
@@ -27,8 +32,8 @@ RDEPENDS:${PN} = " \
     libpng \
     giflib \
     tiff \
+    libexif \
     freetype \
-    poppler \
     avahi-daemon \
     avahi-dnsconfd \
     libavahi-client \
@@ -39,10 +44,6 @@ RDEPENDS:${PN} = " \
     librsvg \
     eudev \
     libsndfile1 \
-    gstreamer1.0 \
-	gstreamer1.0-libav \
-	gstreamer1.0-plugins-good \
-	gstreamer1.0-plugins-bad \
     libeet \
     libefreet \
     ecore-audio \
@@ -54,7 +55,6 @@ RDEPENDS:${PN} = " \
     ecore-con \
     ecore-ipc \
     ecore-x \
-    ecore-evas \
     libemotion \
     eo \
     ecore \
@@ -76,13 +76,13 @@ RDEPENDS:${PN} = " \
     "
 
 SRC_URI = " \
-    git://git.enlightenment.org/enlightenment/enlightenment.git;protocol=https;branch=v-${BPV}.0 \
+    git://git.enlightenment.org/enlightenment/enlightenment.git;protocol=https;branch=v-${BPV} \
 	"
 
-SRCREV = "cae78cbb169f237862faef123e4abaf63a1f5064"
+SRCREV = "910b1cb675735ef260030770cac641cef0e7507b"
 
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=e1ed2f444f5f25489cb211dca860bd82 \
+    file://COPYING;md5=3009c9b67e3cd69e5916f2f0d64718c6 \
     "
 
 inherit meson pkgconfig gettext mime-xdg
@@ -99,7 +99,6 @@ EXTRA_OEMESON = " \
     -Dgeolocation=false \
     -Dbacklight=false \
     -Dbattery=false \
-    -Dsysinfo=false \
     -Dmount-eeze=true \
     "
 
