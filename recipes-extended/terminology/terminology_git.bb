@@ -1,5 +1,5 @@
 SUMMARY = "EFL Terminal Emulator"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 HOMEPAGE = "https://www.enlightenment.org"
 
 # Compute the first two digits of ${PV} as Base PV...
@@ -29,6 +29,7 @@ S = "${WORKDIR}/git"
 
 EXTRA_OEMESON = " \
     -Dedje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
+    -Deet=${STAGING_BINDIR_NATIVE}/eet \
     "
 
 FILES:${PN} = " \

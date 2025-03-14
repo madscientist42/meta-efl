@@ -1,5 +1,5 @@
 SUMMARY = "EFL Terminal Emulator"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 HOMEPAGE = "https://www.enlightenment.org"
 
 LIC_FILES_CHKSUM = " \

@@ -1,5 +1,5 @@
 SUMMARY = "EFL based photo display/manipulation/editor tool"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 HOMEPAGE = "https://www.enlightenment.org"
 
 DEPENDS += " \

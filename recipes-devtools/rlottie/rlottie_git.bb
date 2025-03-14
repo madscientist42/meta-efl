@@ -1,6 +1,6 @@
 DESCRIPTION = "rlottie is a platform independent standalone c++ library for rendering vector based animations and art in realtime."
 HOMEPAGE = "https://github.com/Samsung/rlottie"
-LICENSE = "MIT+BSD+MPL+FreeType"
+LICENSE = "MIT&BSD-3-Clause&MPL-2.0&FTL"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=9c6767159882cf3781303201885daa7f \
     file://licenses/COPYING.MIT;md5=fa9f69cbd246c28e686c58e0af9a1979 \

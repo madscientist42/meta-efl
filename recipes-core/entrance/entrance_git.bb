@@ -1,5 +1,5 @@
 SUMMARY = "Entrance EFL based X11 display manager"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-or-later"
 HOMEPAGE = "https://github.com/Obsidian-StudiosInc/entrance"
 
 DEPENDS += " \
