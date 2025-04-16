@@ -8,7 +8,7 @@ SRC_URI = " \
     git://github.com/AOMediaCodec/libavif.git;protocol=http;branch=master \
     "
 
-SRCREV = "v${PV}"
+SRCREV = "ac76fe0d16a255bccefff5bdfddd865742176d85"
 S = "${WORKDIR}/git"
 
 inherit cmake
